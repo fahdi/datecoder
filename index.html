@@ -1,102 +1,438 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>DateCoder - Date and Time code for PHP, MySQL and many more</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <script type='text/javascript'>//<![CDATA[
-        $(window).load(function(){
-
-        });//]]>
-    </script>
+     <title>DateCoder - Date and Time code for PHP, MySQL and many more</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/main.css" rel="stylesheet" media="screen">
+    <link href="css/animate.css" rel="stylesheet" media="screen">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    	<script src="http://www.dailycube.de/themes/productx/js/respond.min.js"></script>
+    <![endif]-->
 </head>
-<body>
-  <form action="#" method="post">            
-    <fieldset>
-        <legend>Date Coder</legend>
-         <div class='row'>
-            <div class='col-sm-1'>
-                <div class='form-group'>
-                    <label for="user_locale">Language</label>
-                    <select class="form-control" id="code_language" name="code[lang]">
-                        <option value="php" selected="selected">PHP</option>
-                        <option value="mysql" >MySQL</option>
-                    </select>
+  <body>
+  <!-- NAVBAR -->
+	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+		<div class="container">
+        	<div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          
+        </div>
+            <div class="collapse navbar-collapse">
+              <ul class="nav navbar-nav" id="nav">
+                <li class="active"><a href="#home">Home</a></li>
+                <li class="active"><a href="#subscribe">Subscribe</a></li>
+                <li><a href="#getinvolved">Get Involved</a></li>
+                <li><a href="#getintouch">Contact</a></li>
+              </ul>
+            </div>
+		</div>
+	</div>
+  <!-- PART 1 -->
+  	<div class="part1" id="home">
+        <div class="row animated fadeInDownBig">
+            <div class="col-md-12 col-md-offset-12">
+                <div class="text-center">
+                    <img src="img/datecoder.svg"/>
+                    <h1>Generate Date and Time code for many languages.</h1>
+                    <p>Please select the language and different date or time fields to create your code.</p>
                 </div>
             </div>
         </div>
+        <div class='row '>
+            <div class='col-md-1'>&nbsp;</div>
+        </div>     
+        <div class="row animated fadeInUpBig text-center">
+                    <form action="#" method="post">            
+                        
+                             <div class='row'>
+                                <div class='col-md-2 col-md-offset-5'>
+                                    <div class='form-group text-center'>
+                                        <label for="lang">Language</label>
+                                        <select class="form-control" id="lang" name="code[lang]">
+                                            <option value="php" selected="selected">PHP</option>
+                                            <option value="mysql" >MySQL</option>
+                                        </select>
+                                    </div>
+                                </div>
+                             </div>
 
-           <div class='row'>
-            <div class='col-sm-1'>
-                <div class='form-group'>
-                    <label for="user_locale">Language</label>
-                    <select class="form-control" id="code_language" name="code[lang]">
-                        <option value="php" selected="selected">PHP</option>
-                        <option value="mysql" >MySQL</option>
-                    </select>
+                            <div class='row '>
+                            <div class='col-md-1 col-md-offset-2'>
+                                <div class='form-group'>
+                                    <label for="element1">Element</label>
+                                    <select class="form-control" id="element1" name="code[element1]">
+                                        <option value="day" selected="selected">Day</option>
+                                        <option value="month" >Month</option>
+                                        <option value="year" >Year</option>
+                                        <option value="week" >Week</option>
+                                        <option value="hour" >Hour</option>
+                                        <option value="minute" >Minute</option>
+                                        <option value="second" >Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" >Empty</option>
+                                    </select>
+                                </div>
+                            </div>
+                               <div class='col-md-1'>
+                                <div class='form-group'>
+                                    <label for="element2">Element</label>
+                                    <select class="form-control" id="element2" name="code[element2]">
+                                        <option value="day">Day</option>
+                                        <option value="month" selected="selected">Month</option>
+                                        <option value="year" >Year</option>
+                                        <option value="week" >Week</option>
+                                        <option value="hour" >Hour</option>
+                                        <option value="minute" >Minute</option>
+                                        <option value="second" >Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" >Empty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-1'>
+                                <div class='form-group'>
+                                    <label for="element3">Element</label>
+                                    <select class="form-control" id="element3" name="code[element3]">
+                                        <option value="day">Day</option>
+                                        <option value="month">Month</option>
+                                        <option value="year" selected="selected">Year</option>
+                                        <option value="week" >Week</option>
+                                        <option value="hour" >Hour</option>
+                                        <option value="minute" >Minute</option>
+                                        <option value="second" >Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" >Empty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-1'>
+                                <div class='form-group'>
+                                    <label for="element4">Element</label>
+                                    <select class="form-control" id="element4" name="code[element4]">
+                                        <option value="day">Day</option>
+                                        <option value="month">Month</option>
+                                        <option value="year">Year</option>
+                                        <option value="week" selected="selected" >Week</option>
+                                        <option value="hour" >Hour</option>
+                                        <option value="minute" >Minute</option>
+                                        <option value="second" >Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" >Empty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-1'>
+                                <div class='form-group'>
+                                    <label for="element5">Element</label>
+                                    <select class="form-control" id="element5" name="code[element5]">
+                                        <option value="day">Day</option>
+                                        <option value="month">Month</option>
+                                        <option value="year">Year</option>
+                                        <option value="week" >Week</option>
+                                        <option value="hour" selected="selected" >Hour</option>
+                                        <option value="minute" >Minute</option>
+                                        <option value="second" >Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" >Empty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-1'>
+                                <div class='form-group'>
+                                    <label for="element6">Element</label>
+                                    <select class="form-control" id="element6" name="code[element6]">
+                                        <option value="day">Day</option>
+                                        <option value="month">Month</option>
+                                        <option value="year">Year</option>
+                                        <option value="week" >Week</option>
+                                        <option value="hour" >Hour</option>
+                                        <option value="minute" selected="selected" >Minute</option>
+                                        <option value="second" >Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" >Empty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-1'>
+                                <div class='form-group'>
+                                    <label for="element7">Element</label>
+                                    <select class="form-control" id="element7" name="code[element7]">
+                                        <option value="day">Day</option>
+                                        <option value="month">Month</option>
+                                        <option value="year">Year</option>
+                                        <option value="week" >Week</option>
+                                        <option value="hour" >Hour</option>
+                                        <option value="minute">Minute</option>
+                                        <option value="second" selected="selected">Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" >Empty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-1'>
+                                <div class='form-group'>
+                                    <label for="element8">Element</label>
+                                    <select class="form-control" id="element8" name="code[element8]">
+                                        <option value="day">Day</option>
+                                        <option value="month">Month</option>
+                                        <option value="year">Year</option>
+                                        <option value="week" >Week</option>
+                                        <option value="hour" >Hour</option>
+                                        <option value="minute">Minute</option>
+                                        <option value="second">Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" selected="selected">Empty</option>
+                                    </select>
+                                </div>
+                            </div>    
+                           </div>
+                        
+                        
+                            <div class='row'>
+                            <div class='col-md-1 col-md-offset-2'>
+                                <div class='form-group'>
+                                    <label for="element1">Element</label>
+                                    <select class="form-control" id="element1" name="code[element1]">
+                                        <option value="day" selected="selected">Day</option>
+                                        <option value="month" >Month</option>
+                                        <option value="year" >Year</option>
+                                        <option value="week" >Week</option>
+                                        <option value="hour" >Hour</option>
+                                        <option value="minute" >Minute</option>
+                                        <option value="second" >Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" >Empty</option>
+                                    </select>
+                                </div>
+                            </div>
+                               <div class='col-md-1'>
+                                <div class='form-group'>
+                                    <label for="element2">Element</label>
+                                    <select class="form-control" id="element2" name="code[element2]">
+                                        <option value="day">Day</option>
+                                        <option value="month" selected="selected">Month</option>
+                                        <option value="year" >Year</option>
+                                        <option value="week" >Week</option>
+                                        <option value="hour" >Hour</option>
+                                        <option value="minute" >Minute</option>
+                                        <option value="second" >Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" >Empty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-1'>
+                                <div class='form-group'>
+                                    <label for="element3">Element</label>
+                                    <select class="form-control" id="element3" name="code[element3]">
+                                        <option value="day">Day</option>
+                                        <option value="month">Month</option>
+                                        <option value="year" selected="selected">Year</option>
+                                        <option value="week" >Week</option>
+                                        <option value="hour" >Hour</option>
+                                        <option value="minute" >Minute</option>
+                                        <option value="second" >Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" >Empty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-1'>
+                                <div class='form-group'>
+                                    <label for="element4">Element</label>
+                                    <select class="form-control" id="element4" name="code[element4]">
+                                        <option value="day">Day</option>
+                                        <option value="month">Month</option>
+                                        <option value="year">Year</option>
+                                        <option value="week" selected="selected" >Week</option>
+                                        <option value="hour" >Hour</option>
+                                        <option value="minute" >Minute</option>
+                                        <option value="second" >Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" >Empty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-1'>
+                                <div class='form-group'>
+                                    <label for="element5">Element</label>
+                                    <select class="form-control" id="element5" name="code[element5]">
+                                        <option value="day">Day</option>
+                                        <option value="month">Month</option>
+                                        <option value="year">Year</option>
+                                        <option value="week" >Week</option>
+                                        <option value="hour" selected="selected" >Hour</option>
+                                        <option value="minute" >Minute</option>
+                                        <option value="second" >Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" >Empty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-1'>
+                                <div class='form-group'>
+                                    <label for="element6">Element</label>
+                                    <select class="form-control" id="element6" name="code[element6]">
+                                        <option value="day">Day</option>
+                                        <option value="month">Month</option>
+                                        <option value="year">Year</option>
+                                        <option value="week" >Week</option>
+                                        <option value="hour" >Hour</option>
+                                        <option value="minute" selected="selected" >Minute</option>
+                                        <option value="second" >Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" >Empty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-1'>
+                                <div class='form-group'>
+                                    <label for="element7">Element</label>
+                                    <select class="form-control" id="element7" name="code[element7]">
+                                        <option value="day">Day</option>
+                                        <option value="month">Month</option>
+                                        <option value="year">Year</option>
+                                        <option value="week" >Week</option>
+                                        <option value="hour" >Hour</option>
+                                        <option value="minute">Minute</option>
+                                        <option value="second" selected="selected">Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" >Empty</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-1'>
+                                <div class='form-group'>
+                                    <label for="element8">Element</label>
+                                    <select class="form-control" id="element8" name="code[element8]">
+                                        <option value="day">Day</option>
+                                        <option value="month">Month</option>
+                                        <option value="year">Year</option>
+                                        <option value="week" >Week</option>
+                                        <option value="hour" >Hour</option>
+                                        <option value="minute">Minute</option>
+                                        <option value="second">Second</option>
+                                        <option value="meridiem" >Meridiem</option>
+                                        <option value="other" >Other</option>
+                                        <option value="" selected="selected">Empty</option>
+                                    </select>
+                                </div>
+                            </div>    
+                           </div>
+                    </form>
+                </div>
+                <div class='row animated fadeInUpBig'>
+                    <div class='col-md-4 col-md-offset-4 text-center padding-pre'>
+                        <pre>date('j n Y g:i:s');</pre>
+                    </div>
                 </div>
             </div>
-               <div class='col-sm-1'>
-                <div class='form-group'>
-                    <label for="user_locale">Language</label>
-                    <select class="form-control" id="code_language" name="code[lang]">
-                        <option value="php" selected="selected">PHP</option>
-                        <option value="mysql" >MySQL</option>
-                    </select>
+  <!-- PART 2 -->
+  	<div class="part2" id="subscribe">
+      <div class="container">
+        <div class="text-center">
+            <h1>Stay tuned for updates</h1>
+            <br>
+            <p>If you want to get notified when we release a new feature or update, enter your email below. We will send you a message so that you can check out our new features. We won't spam. Promise.</p>
+            <br>
+            <form action="PLACEHOLDER_FOR_MAILCHIMP" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form">
+            	<button type="submit" class="btn btn-lg btn-primary" style="float: right">Subscribe</button>
+            	<div style="overflow: hidden; padding-right: .5em;">
+                	<input name="EMAIL" id="mce-EMAIL" type="email" class="form-control input-lg" placeholder="Your email adress" required />
                 </div>
-            </div>
-            <div class='col-sm-1'>
-                <div class='form-group'>
-                    <label for="user_locale">Language</label>
-                    <select class="form-control" id="code_language" name="code[lang]">
-                        <option value="php" selected="selected">PHP</option>
-                        <option value="mysql" >MySQL</option>
-                    </select>
-                </div>
-            </div>
-            <div class='col-sm-1'>
-                <div class='form-group'>
-                    <label for="user_locale">Language</label>
-                    <select class="form-control" id="code_language" name="code[lang]">
-                        <option value="php" selected="selected">PHP</option>
-                        <option value="mysql" >MySQL</option>
-                    </select>
-                </div>
-            </div>
-            <div class='col-sm-1'>
-                <div class='form-group'>
-                    <label for="user_locale">Language</label>
-                    <select class="form-control" id="code_language" name="code[lang]">
-                        <option value="php" selected="selected">PHP</option>
-                        <option value="mysql" >MySQL</option>
-                    </select>
-                </div>
-            </div>
-            <div class='col-sm-1'>
-                <div class='form-group'>
-                    <label for="user_locale">Language</label>
-                    <select class="form-control" id="code_language" name="code[lang]">
-                        <option value="php" selected="selected">PHP</option>
-                        <option value="mysql" >MySQL</option>
-                    </select>
-                </div>
-            </div>
-            <div class='col-sm-1'>
-                <div class='form-group'>
-                    <label for="user_locale">Language</label>
-                    <select class="form-control" id="code_language" name="code[lang]">
-                        <option value="php" selected="selected">PHP</option>
-                        <option value="mysql" >MySQL</option>
-                    </select>
-                </div>
-            </div>
+            </form>
         </div>
-    </fieldset>
-</form>
+      </div>
+  </div>
   
-</body>
+    <div class="part3" id="getinvolved">
+             <a href="https://github.com/fahdi"><img style="float:right;position:fixed; top: 80px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+      <div class="container">
+        <div class="text-center">
+       
+            <div class="col-md-12" id="contact">
+                     
+                <h1>Get Involved</h1>
+                <p>
+                    
+               It is a fun project for me and so far, I am the only developer on the project. I would love if anyone gets involved in the project. If you want to improve the project is any way, fork the project at <a href="https://github.com/fahdi/datecoder">GitHub</a> and make your changes. Once you are done, send a pull request and your code will be merged to the repository and pushed to the live site at <a href="http://www.datecoder.com">www.datecoder.com</a>
+                </p>
+            </div>
+        </div>
+      </div>
+  </div>
 
 
+  <!-- PART 4 -->
+  	<div class="part4" id="getintouch">
+      <div class="container">
+        <div class="text-center">
+            <h1>Get in touch</h1>
+            <br><br>
+            <p>Probably the best way to reach us is filling in the following form. Don't forget to like a our facebook page.</p>
+            <br>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form method="post" action="php/contactmail.php">
+                    <input name="name" type="text" class="form-control input-lg" placeholder="Your Name" required />
+                    <br>
+                    <input name="email" type="email" class="form-control input-lg" placeholder="Your email adress" required />
+                    <br>
+                    <textarea name="content" class="form-control" rows="5" placeholder="Your message" required> </textarea>
+                    <br>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Send message</button>
+                </form>
+            </div>
+            <br><br>
+            <!-- SOCIAL -->
+            <div class="col-md-6 text-center">
+                <div class="social text-center">
+                    <a href="http://www.facebook.com/datecoder" class="icons fb"></a>
+                    <a href="http://www.twitter.com/datecoder" class="icons twitter"></a>
+                    <a href="mailto:info@datecoder.com" class="icons mail"></a>
+                    <br><br>
+                    <a href="http://www.linkedin.com/datecoder" class="icons linkedin"></a>
+                    <a href="http://plus.google.com/datecoder" class="icons google"></a>
+                    <a href="skype:fahd.murtaza?chat" class="icons skype"></a>
+                </div>  
+            </div>
+        </div>
+      </div>
+  </div>
+  <!-- JAVASCRIPTS -->
+  	<script src="js/jquery.js"></script>
+    <script src="js/jquery.scrollTo.js"></script>
+    <script src="js/jquery.nav.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#nav').onePageNav();
+        });
+    </script>
+    <script src="js/bootstrap.js"></script>
+  </body>
 </html>
-

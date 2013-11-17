@@ -1,0 +1,349 @@
+@charset "utf-8";
+
+@import url("http://fonts.googleapis.com/css?family=Roboto:400,900,700,300,100,500");
+
+
+/* This is the Main Stylesheet holding all customizations */
+/* If you are not sure on how to change something, have a look in the docs, before contacting us */
+
+/* CONTENT MENU */
+/* 1. General Settings */
+/* 2. Timer Grid */
+/* 3. Navbar */
+/* 4. Page Sections */
+/* 5. Subscription Section */
+/* 6. Social Icons */
+
+
+/* ---- 1. GERNERAL SETTINGS ---- */
+body {
+	width:auto;
+	/*overflow-x: hidden; */
+	webkit-overflow-x: hidden;
+	font-family: 'Roboto', sans-serif; /* Google Font */
+	padding-top:80px;
+	background-color: #fff;
+	background-position: 100px auto;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	margin-bottom:0px;
+	padding-bottom:0px;
+	color:#000;
+}
+
+img.bg {
+	/* Set rules to fill background */
+	min-height: 100%;
+	min-width: 1024px;
+	
+	/* Set up proportionate scaling */
+	width: 100%;
+	height: auto;
+	
+	/* Set up positioning */
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+/* ---- 2. TIMER GRID ---- */
+ul.cd {
+	text-align:center;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+	position:relative;
+	list-style:none;
+	z-index:100;
+	top: 15%;
+}
+
+ul.cd li {
+	margin-left:20px;
+	margin-right:20px;
+}
+
+ul.cd li,
+ul.cd li span {
+margin-top: 8%;
+margin-bottom: 0;
+font-size: 80px;
+font-weight: bold;
+display: inline-block;
+z-index: 100;
+color: #fff;
+background: #000;
+padding: 5px;
+}
+ul.cd li span.timecaption {
+	margin-top:1px;
+	display:block;
+	font-size:28px;
+	font-weight:300;
+}
+
+@media screen and (max-width: 662px) {	
+	ul.cd li,
+	ul.cd li span {
+		margin-top:8%;
+		font-size:50px;
+	}
+	
+}
+
+@media screen and (max-width: 480px) {
+	ul.cd li,
+	ul.cd li span {
+		margin-top:8%;
+		font-size:30px;
+	}
+	
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+  }
+}
+
+/* ---- 3. NAVBAR ---- */
+.navbar {
+	min-height:80px;
+}
+
+.navbar-fixed-top, .navbar-fixed-bottom {
+	border-width: 0 0 0;
+}
+
+.navbar-nav {
+	font-family:'Roboto', sans-serif;
+	font-weight:400;
+	font-size:1.2em;
+}
+
+.navbar-nav>li>a {
+	/* NavBar Section height fix */
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.navbar-toggle {
+	/* Mobile NavBar Button Position fix */
+	margin-top: 25px; 
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus {
+	/* Color of active NavBar section */
+	color: #fff;
+	background-color: #000;
+}
+
+/* ---- 4. PAGE SECTIONS ---- */
+h1 {
+	padding-top:0px;
+	color: #000;
+	font-family: 'Roboto', sans-serif;
+	font-weight:300;
+	font-size:3.5em;
+}
+
+h2 {
+	font-family: 'Roboto', sans-serif;
+	text-transform:uppercase;
+	font-weight:100;
+	font-size:3em;
+}
+
+h3 {
+	margin-top:0px;
+	padding-top:0px;
+	font-family: 'Roboto', sans-serif;
+	font-weight:300;
+}
+
+.part1 {
+	height:auto;
+	padding-bottom:10%;
+	padding-top:20px;
+	width:100%;
+}
+
+.part1 p {
+	color:#000;
+}
+
+.part2 {
+	color:#fff;
+	height:350px;
+	width:100%;
+	margin-bottom:10px;
+	background: rgba(0,0,0,0.9)
+}
+.part2 h1{
+color: #fff;
+
+}
+
+.part3 {
+	color:#000;
+	height:auto;
+	width:100%;
+	margin-bottom:40px;
+	background: rgba(255, 255, 255, 0)
+}
+
+.part3 p{
+color: #000;
+
+}
+
+
+.part4 {
+	color:#fff;
+	height:auto;
+	width:100%;
+	padding-bottom:30px;
+	background: rgba(0,0,0,0.9);
+	margin-bottom:0px;
+}
+
+.part4 h1{
+color: #fff;
+
+}
+
+.btn-primary {
+color: #000;
+background-color: #fff;
+border-color: #aaa;
+}
+
+/* ---- 5. SUBSCRIPTION SECTIONS ---- */
+.input-lg {
+	font-family: 'Roboto', sans-serif;
+	font-weight:300;
+	font-size:1em;
+	background:rgba(38,38,38,1);
+	color:#fff;
+}
+
+.input-lg:focus {
+	border-color:#fff;
+}
+
+.thumbnail {
+	background-color:transparent;
+}
+
+.thumbnail .caption {
+	color:#fff;
+	padding:0px;
+}
+
+.thumbnail .caption h3 {
+	font-family: 'Roboto', sans-serif;
+	font-weight:300;
+}
+
+.form-control {
+	background-color:transparent;
+	font-family: 'Roboto', sans-serif;
+	font-weight:300;
+	font-size:1em;
+	color:#000;
+}
+
+.part2 .form-control {
+	background-color:transparent;
+	font-family: 'Roboto', sans-serif;
+	font-weight:300;
+	font-size:1em;
+	color:#fff;
+}
+
+
+.form-control:focus {
+	border-color:#fff;
+}
+
+/* ---- 6. SOCIAL ICONS ---- */
+.social a.icons {
+	width: 64px;
+	height: 64px;
+	display: inline-block;
+	margin-right: 25px;
+	background: url("../img/social.png") no-repeat;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+.social a.icons.fb {
+	background-position: 0 0;
+}
+.social a.icons.fb:hover {
+	background-position: 0 -64px;
+}
+.social a.icons.twitter {
+	background-position: -64px 0;
+}
+.social a.icons.twitter:hover {
+	background-position: -64px -64px;
+}
+.social a.icons.mail {
+	background-position: -128px 0;
+}
+.social a.icons.mail:hover {
+	background-position: -128px -64px;
+}
+.social a.icons.linkedin {
+	background-position: -192px 0;
+}
+.social a.icons.linkedin:hover {
+	background-position: -192px -64px;
+}
+.social a.icons.google {
+	background-position: -256px 0;
+}
+.social a.icons.google:hover {
+	background-position: -256px -64px;
+}
+.social a.icons.skype {
+	background-position: -320px 0;
+}
+.social a.icons.skype:hover {
+	background-position: -320px -64px;
+}
+
+/* ---- 7. FIXES ---- */
+#home {
+	padding-top:80px;
+}
+
+#service {
+	padding-top:80px;
+}
+
+.row.animated {
+    margin-right: 0;
+}
+
+/* Code Display */
+pre {
+    padding: 5px;
+    font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+    margin-bottom: 10px;
+    background-color: rgb(238, 238, 238);
+    overflow: auto;
+    width: auto;
+    max-height: 600px;
+    word-wrap:normal;
+}
+
+.padding-pre{
+    margin-top:100px;
+}
