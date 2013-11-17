@@ -254,7 +254,7 @@ border-color: #aaa;
 	color:#000;
 }
 
-.part2 .form-control {
+.part2 .form-control,.part4 .form-control {
 	background-color:transparent;
 	font-family: 'Roboto', sans-serif;
 	font-weight:300;
