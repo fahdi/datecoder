@@ -14,6 +14,7 @@
     <!--[if lt IE 9]>
     	<script src="http://www.dailycube.de/themes/productx/js/respond.min.js"></script>
     <![endif]-->
+    <link rel="shortcut icon" href="img/icon.svg" sizes="any" type="image/svg+xml">
 </head>
 
 <body>
@@ -51,7 +52,7 @@
         <div class="row animated fadeInDownBig">
             <div class="col-md-12 col-md-offset-12">
                 <div class="text-center">
-                    <img src="img/datecoder.svg" />
+                    <img src="img/datecoder.svg" width="300px" alt="Date Coder"/>
                     <h1>Generate Date and Time code for many languages.</h1>
                     <p>Please select the language and different date or time fields to create your code.</p>
                 </div>
@@ -134,8 +135,8 @@
                                 <option value="day">Day</option>
                                 <option value="month">Month</option>
                                 <option value="year">Year</option>
-                                <option value="week" selected="selected">Week</option>
-                                <option value="hour">Hour</option>
+                                <option value="week">Week</option>
+                                <option value="hour" selected="selected">Hour</option>
                                 <option value="minute">Minute</option>
                                 <option value="second">Second</option>
                                 <option value="meridiem">Meridiem</option>
@@ -148,12 +149,12 @@
                         <div class='form-group'>
                             <label for="element5">Element</label>
                             <select class="form-control" id="element5" name="code[element5]">
-                                <option value="day">Day</option>
+                                 <option value="day">Day</option>
                                 <option value="month">Month</option>
                                 <option value="year">Year</option>
                                 <option value="week">Week</option>
-                                <option value="hour" selected="selected">Hour</option>
-                                <option value="minute">Minute</option>
+                                <option value="hour">Hour</option>
+                                <option value="minute" selected="selected">Minute</option>
                                 <option value="second">Second</option>
                                 <option value="meridiem">Meridiem</option>
                                 <option value="other">Other</option>
@@ -170,8 +171,8 @@
                                 <option value="year">Year</option>
                                 <option value="week">Week</option>
                                 <option value="hour">Hour</option>
-                                <option value="minute" selected="selected">Minute</option>
-                                <option value="second">Second</option>
+                                <option value="minute">Minute</option>
+                                <option value="second" selected="selected">Second</option>
                                 <option value="meridiem">Meridiem</option>
                                 <option value="other">Other</option>
                                 <option value="">Empty</option>
@@ -188,8 +189,8 @@
                                 <option value="week">Week</option>
                                 <option value="hour">Hour</option>
                                 <option value="minute">Minute</option>
-                                <option value="second" selected="selected">Second</option>
-                                <option value="meridiem">Meridiem</option>
+                                <option value="second">Second</option>
+                                <option value="meridiem" selected="selected">Meridiem</option>
                                 <option value="other">Other</option>
                                 <option value="">Empty</option>
                             </select>
@@ -218,110 +219,67 @@
                 <div class='row'>
                     <div class='col-md-1 col-md-offset-2'>
                         <div class='form-group'>
-                            <label for="element1">Element</label>
-                            <select class="form-control" id="element1" name="code[element1]">
-                                <option value="day" selected="selected">Day</option>
-                                <option value="month">Month</option>
-                                <option value="year">Year</option>
-                                <option value="week">Week</option>
-                                <option value="hour">Hour</option>
-                                <option value="minute">Minute</option>
-                                <option value="second">Second</option>
-                                <option value="meridiem">Meridiem</option>
-                                <option value="other">Other</option>
-                                <option value="">Empty</option>
+                            <label for="format1">Format</label>
+                            <select class="form-control" id="format1" name="code[format1]">
+                                <option value="" selected="selected">1 ... 31</option>
+                                <option value="">01 ... 31</option>
+                                <option value="">Monday</option>
+                                <option value="">Mon</option>
+                                <option value="">st, nd, rd, ...</option>
                             </select>
                         </div>
                     </div>
                     <div class='col-md-1'>
                         <div class='form-group'>
-                            <label for="element2">Element</label>
-                            <select class="form-control" id="element2" name="code[element2]">
-                                <option value="day">Day</option>
-                                <option value="month" selected="selected">Month</option>
-                                <option value="year">Year</option>
-                                <option value="week">Week</option>
-                                <option value="hour">Hour</option>
-                                <option value="minute">Minute</option>
-                                <option value="second">Second</option>
-                                <option value="meridiem">Meridiem</option>
-                                <option value="other">Other</option>
-                                <option value="">Empty</option>
+                            <label for="format2">Format</label>
+                            <select class="form-control" id="format2" name="code[format2]">
+                                <option value="" selected="selected">1 ... 12</option>
+                                <option value="">01 ... 12</option>
+                                <option value="">January</option>
+                                <option value="">Jan</option>
                             </select>
                         </div>
                     </div>
                     <div class='col-md-1'>
                         <div class='form-group'>
-                            <label for="element3">Element</label>
-                            <select class="form-control" id="element3" name="code[element3]">
-                                <option value="day">Day</option>
-                                <option value="month">Month</option>
-                                <option value="year" selected="selected">Year</option>
-                                <option value="week">Week</option>
-                                <option value="hour">Hour</option>
-                                <option value="minute">Minute</option>
-                                <option value="second">Second</option>
-                                <option value="meridiem">Meridiem</option>
-                                <option value="other">Other</option>
-                                <option value="">Empty</option>
+                            <label for="format3">Format</label>
+                            <select class="form-control" id="format3" name="code[format3]">
+                                <option value="" selected="selected">2013</option>
+                                <option value="">13</option>
                             </select>
                         </div>
                     </div>
                     <div class='col-md-1'>
                         <div class='form-group'>
-                            <label for="element4">Element</label>
-                            <select class="form-control" id="element4" name="code[element4]">
-                                <option value="day">Day</option>
-                                <option value="month">Month</option>
-                                <option value="year">Year</option>
-                                <option value="week" selected="selected">Week</option>
-                                <option value="hour">Hour</option>
-                                <option value="minute">Minute</option>
-                                <option value="second">Second</option>
-                                <option value="meridiem">Meridiem</option>
-                                <option value="other">Other</option>
-                                <option value="">Empty</option>
+                            <label for="format4">Format</label>
+                            <select class="form-control" id="format4" name="code[format4]">
+                                <option value="" selected="selected">1 ... 12</option>
+                                <option value="">01 ... 12</option>
+                                <option value="">1 ... 24</option>
+                                <option value="">01 ... 24</option>
                             </select>
                         </div>
                     </div>
                     <div class='col-md-1'>
                         <div class='form-group'>
-                            <label for="element5">Element</label>
-                            <select class="form-control" id="element5" name="code[element5]">
-                                <option value="day">Day</option>
-                                <option value="month">Month</option>
-                                <option value="year">Year</option>
-                                <option value="week">Week</option>
-                                <option value="hour" selected="selected">Hour</option>
-                                <option value="minute">Minute</option>
-                                <option value="second">Second</option>
-                                <option value="meridiem">Meridiem</option>
-                                <option value="other">Other</option>
-                                <option value="">Empty</option>
+                            <label for="format5">Format</label>
+                            <select class="form-control" id="format5" name="code[format5]">
+                                <option value="" selected="selected">00 ... 59</option>
                             </select>
                         </div>
                     </div>
                     <div class='col-md-1'>
                         <div class='form-group'>
-                            <label for="element6">Element</label>
-                            <select class="form-control" id="element6" name="code[element6]">
-                                <option value="day">Day</option>
-                                <option value="month">Month</option>
-                                <option value="year">Year</option>
-                                <option value="week">Week</option>
-                                <option value="hour">Hour</option>
-                                <option value="minute" selected="selected">Minute</option>
-                                <option value="second">Second</option>
-                                <option value="meridiem">Meridiem</option>
-                                <option value="other">Other</option>
-                                <option value="">Empty</option>
+                            <label for="format6">Format</label>
+                            <select class="form-control" id="format6" name="code[format6]">
+                                <option value="" selected="selected">00 ... 59</option>
                             </select>
                         </div>
                     </div>
                     <div class='col-md-1'>
                         <div class='form-group'>
-                            <label for="element7">Element</label>
-                            <select class="form-control" id="element7" name="code[element7]">
+                            <label for="format7">Format</label>
+                            <select class="form-control" id="format7" name="code[format7]">
                                 <option value="day">Day</option>
                                 <option value="month">Month</option>
                                 <option value="year">Year</option>
@@ -337,8 +295,8 @@
                     </div>
                     <div class='col-md-1'>
                         <div class='form-group'>
-                            <label for="element8">Element</label>
-                            <select class="form-control" id="element8" name="code[element8]">
+                            <label for="format8">Format</label>
+                            <select class="form-control" id="format8" name="code[format8]">
                                 <option value="day">Day</option>
                                 <option value="month">Month</option>
                                 <option value="year">Year</option>
