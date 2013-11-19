@@ -347,3 +347,13 @@ pre {
 .padding-pre{
     margin-top:100px;
 }
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+/*Adding two and a half column*/
+.col-md-offset-2-5{
+	margin-left: 20.83333333333333%;
+}
