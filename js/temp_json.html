@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script class="jsbin" src="jquery.min.js"></script>
+<meta charset=utf-8 />
+<title>Test Page</title>
+<!--[if IE]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<style>
+  article, aside, figure, footer, header, hgroup, 
+  menu, nav, section { display: block; }
+  body {
+    font-family: sans-serif;
+  }
+  p {
+    margin: 0px;
+  }
+</style>
+
+<style id="jsbin-css">
+
+</style>
+</head>
+<body>
+  <input type='button' id='btnUpdate' value='Click to Update'>
+  <select id='theSelect'>
+    <option>Old Option</option>
+  </select>
+<script>
+jQuery(function($) {
+  
+  $("#btnUpdate").click(function() {
+
+   
+   data=JSON.parse('{ "options": [ {"value": "New1", "text": "New Option 1"}, {"value": "New2", "text": "New Option 2"}, {"value": "New3", "text": "New Option 3"} ] }');
+        var options, index, select, option;
+
+        // Get the raw DOM object for the select box
+        select = document.getElementById('theSelect');
+        
+        // Clear the old options
+        select.options.length = 0;
+        
+        // Load the new options
+        options = data.options;
+        for (index = 0; index < options.length; ++index) {
+          option = options[index];
+          select.options.add(new Option(option.text, option.value));
+        }
+    
+
+  });
+
+});
+</script>
+</body>
+</html>
