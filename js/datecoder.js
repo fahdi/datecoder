@@ -29,4 +29,69 @@ $(document).ready(function () {
        // $('#selItem').val($(this).val());
        // $('#txtItem').val($('#selItem option:selected').text());
     }); 
+
+
+   $("#element1").on("change", function(e) {
+        $('#txtID').val($(this).val());
+        $('#txtOption').val($('#element1 option:selected').text());
+       // $('#selItem').val($(this).val());
+       // 
+       
+   $("#element1").on("change", function(e) {
+        $('#txtID').val($(this).val());
+        $('#txtOption').val($('#element1 option:selected').text());
+       // $('#selItem').val($(this).val());
+       // $('#txtItem').val($('#selItem option:selected').text());
+    }); 
+
+
+   $("#element1").on("change", function(e) {
+        $('#txtID').val($(this).val());
+        $('#txtOption').val($('#element1 option:selected').text());
+       // $('#selItem').val($(this).val());
+       // 
+       
+   $("#element1").on("change", function(e) {
+        $('#txtID').val($(this).val());
+        $('#txtOption').val($('#element1 option:selected').text());
+       // $('#selItem').val($(this).val());
+       // $('#txtItem').val($('#selItem option:selected').text());
+    }); 
+
+
+   $("#element1").on("change", function(e) {
+        $('#txtID').val($(this).val());
+        $('#txtOption').val($('#element1 option:selected').text());
+       // $('#selItem').val($(this).val());
+       // 
+       
+   $("#element1").on("change", function(e) {
+        $('#txtID').val($(this).val());
+        $('#txtOption').val($('#element1 option:selected').text());
+       // $('#selItem').val($(this).val());
+       // $('#txtItem').val($('#selItem option:selected').text());
+    }); 
+
+
+   $("#element1").on("change", function(e) {
+        $('#txtID').val($(this).val());
+        $('#txtOption').val($('#element1 option:selected').text());
+       // $('#selItem').val($(this).val());
+       // 
+       
+   $("#element1").on("change", function(e) {
+        $('#txtID').val($(this).val());
+        $('#txtOption').val($('#element1 option:selected').text());
+       // $('#selItem').val($(this).val());
+       // $('#txtItem').val($('#selItem option:selected').text());
+    }); 
+
+
+   $("#element1").on("change", function(e) {
+        $('#txtID').val($(this).val());
+        $('#txtOption').val($('#element1 option:selected').text());
+       // $('#selItem').val($(this).val());
+       // 
+       
+
 });
