@@ -31,13 +31,13 @@ $(document).ready(function () {
     }); 
 
 
-   $("#element1").on("change", function(e) {
+   $("#element2").on("change", function(e) {
         $('#txtID').val($(this).val());
         $('#txtOption').val($('#element1 option:selected').text());
        // $('#selItem').val($(this).val());
        // 
-       
-   $("#element1").on("change", function(e) {
+    });     
+   $("#element3").on("change", function(e) {
         $('#txtID').val($(this).val());
         $('#txtOption').val($('#element1 option:selected').text());
        // $('#selItem').val($(this).val());
@@ -45,13 +45,13 @@ $(document).ready(function () {
     }); 
 
 
-   $("#element1").on("change", function(e) {
+   $("#element4").on("change", function(e) {
         $('#txtID').val($(this).val());
         $('#txtOption').val($('#element1 option:selected').text());
        // $('#selItem').val($(this).val());
        // 
-       
-   $("#element1").on("change", function(e) {
+     });    
+   $("#element5").on("change", function(e) {
         $('#txtID').val($(this).val());
         $('#txtOption').val($('#element1 option:selected').text());
        // $('#selItem').val($(this).val());
@@ -59,13 +59,14 @@ $(document).ready(function () {
     }); 
 
 
-   $("#element1").on("change", function(e) {
+   $("#element6").on("change", function(e) {
         $('#txtID').val($(this).val());
         $('#txtOption').val($('#element1 option:selected').text());
        // $('#selItem').val($(this).val());
        // 
+    }); 
        
-   $("#element1").on("change", function(e) {
+   $("#element7").on("change", function(e) {
         $('#txtID').val($(this).val());
         $('#txtOption').val($('#element1 option:selected').text());
        // $('#selItem').val($(this).val());
@@ -73,13 +74,13 @@ $(document).ready(function () {
     }); 
 
 
-   $("#element1").on("change", function(e) {
+   $("#format1").on("change", function(e) {
         $('#txtID').val($(this).val());
         $('#txtOption').val($('#element1 option:selected').text());
        // $('#selItem').val($(this).val());
        // 
-       
-   $("#element1").on("change", function(e) {
+     });    
+   $("#format2").on("change", function(e) {
         $('#txtID').val($(this).val());
         $('#txtOption').val($('#element1 option:selected').text());
        // $('#selItem').val($(this).val());
@@ -87,11 +88,12 @@ $(document).ready(function () {
     }); 
 
 
-   $("#element1").on("change", function(e) {
+   $("#format3").on("change", function(e) {
         $('#txtID').val($(this).val());
         $('#txtOption').val($('#element1 option:selected').text());
        // $('#selItem').val($(this).val());
        // 
-       
+     });    
 
 });
+    
