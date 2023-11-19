@@ -1,99 +1,72 @@
-//$( document ).ready(function() {
-  // Handler for .ready() called.
-
-//$("#elements").on("change", function(e) {
-	
-	//alert('it works');
-//	foo = $(this);
-	
-
-//	console.log(foo.text());
-    //$('#formats').find('select').val($(this).val());
-
-    // One strategy
-    //$("#format1, #format2, #format3, #format4, #format5").val($(this).val());
-
-    // Second Strategy
-
-    //var value = $(this).val();
-    //$('select[name=myddl] option[value='+value+']').attr('selected', 'selected');
-
-//});
-//});
-
-
 $(document).ready(function () {
-   $("#element1").on("change", function(e) {
-        $('#txtID').val($(this).val());
-        $('#txtOption').val($('#element1 option:selected').text());
-       // $('#selItem').val($(this).val());
-       // $('#txtItem').val($('#selItem option:selected').text());
-    }); 
-
-
-   $("#element2").on("change", function(e) {
-        $('#txtID').val($(this).val());
-        $('#txtOption').val($('#element1 option:selected').text());
-       // $('#selItem').val($(this).val());
-       // 
-    });     
-   $("#element3").on("change", function(e) {
-        $('#txtID').val($(this).val());
-        $('#txtOption').val($('#element1 option:selected').text());
-       // $('#selItem').val($(this).val());
-       // $('#txtItem').val($('#selItem option:selected').text());
-    }); 
-
-
-   $("#element4").on("change", function(e) {
-        $('#txtID').val($(this).val());
-        $('#txtOption').val($('#element1 option:selected').text());
-       // $('#selItem').val($(this).val());
-       // 
-     });    
-   $("#element5").on("change", function(e) {
-        $('#txtID').val($(this).val());
-        $('#txtOption').val($('#element1 option:selected').text());
-       // $('#selItem').val($(this).val());
-       // $('#txtItem').val($('#selItem option:selected').text());
-    }); 
-
-
-   $("#element6").on("change", function(e) {
-        $('#txtID').val($(this).val());
-        $('#txtOption').val($('#element1 option:selected').text());
-       // $('#selItem').val($(this).val());
-       // 
-    }); 
-       
-   $("#element7").on("change", function(e) {
-        $('#txtID').val($(this).val());
-        $('#txtOption').val($('#element1 option:selected').text());
-       // $('#selItem').val($(this).val());
-       // $('#txtItem').val($('#selItem option:selected').text());
-    }); 
-
-
-   $("#format1").on("change", function(e) {
-        $('#txtID').val($(this).val());
-        $('#txtOption').val($('#element1 option:selected').text());
-       // $('#selItem').val($(this).val());
-       // 
-     });    
-   $("#format2").on("change", function(e) {
-        $('#txtID').val($(this).val());
-        $('#txtOption').val($('#element1 option:selected').text());
-       // $('#selItem').val($(this).val());
-       // $('#txtItem').val($('#selItem option:selected').text());
-    }); 
-
-
-   $("#format3").on("change", function(e) {
-        $('#txtID').val($(this).val());
-        $('#txtOption').val($('#element1 option:selected').text());
-       // $('#selItem').val($(this).val());
-       // 
-     });    
-
-});
-    
+     // Function to update format options based on the selected element
+     function updateFormatOptions(elementId, formatId) {
+         var selectedElement = $('#' + elementId).val();
+         var formatDropdown = $('#' + formatId);
+ 
+         formatDropdown.empty(); // Clear existing options
+ 
+         // Define options based on the selected element
+         switch(selectedElement) {
+             case 'day':
+                 formatDropdown.append('<option value="d">Day (01-31)</option>');
+                 formatDropdown.append('<option value="j">Day (1-31)</option>');
+                 break;
+             case 'month':
+                 formatDropdown.append('<option value="m">Month (01-12)</option>');
+                 formatDropdown.append('<option value="F">Month (January-December)</option>');
+                 break;
+             // Add cases for other elements like 'year', 'hour', etc.
+         }
+     }
+ 
+     // Function to update divider options based on the selected divider
+     function updateDividerOptions(dividerId, dividerOptionId) {
+         var selectedDivider = $('#' + dividerId).val();
+         var dividerOptionDropdown = $('#' + dividerOptionId);
+ 
+         dividerOptionDropdown.empty(); // Clear existing options
+ 
+         // Define options based on the selected divider
+         switch(selectedDivider) {
+             case 'space':
+                 dividerOptionDropdown.append('<option value=" ">Single Space</option>');
+                 break;
+             case 'doubleSpace':
+                 dividerOptionDropdown.append('<option value="  ">Double Space</option>');
+                 break;
+             // Add cases for other dividers like 'comma', 'dash', etc.
+         }
+     }
+ 
+     // Event listeners for each dropdown in the "elements" row
+     $('#element1').on('change', function() {
+         updateFormatOptions('element1', 'format1');
+     });
+     $('#element2').on('change', function() {
+         updateFormatOptions('element2', 'format2');
+     });
+     $('#element3').on('change', function() {
+         updateFormatOptions('element3', 'format3');
+     });
+ 
+     // Event listeners for each dropdown in the "dividers" row
+     $('#divider1').on('change', function() {
+         updateDividerOptions('divider1', 'dividerOption1');
+     });
+     $('#divider2').on('change', function() {
+         updateDividerOptions('divider2', 'dividerOption2');
+     });
+     $('#divider3').on('change', function() {
+         updateDividerOptions('divider3', 'dividerOption3');
+     });
+ 
+     // Initialize the format and divider options based on the default selected elements
+     updateFormatOptions('element1', 'format1');
+     updateFormatOptions('element2', 'format2');
+     updateFormatOptions('element3', 'format3');
+     updateDividerOptions('divider1', 'dividerOption1');
+     updateDividerOptions('divider2', 'dividerOption2');
+     updateDividerOptions('divider3', 'dividerOption3');
+ });
+ 
