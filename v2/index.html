@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DateCoder - Date and Time code for PHP, MySQL and many more</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="../css/main.css" rel="stylesheet" media="screen">
+    <link href="../css/animate.css" rel="stylesheet" media="screen">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="../js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="../img/icon.svg" sizes="any" type="image/svg+xml">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav" id="nav">
+                <li class="active">
+                    <a href="https://www.fahdmurtaza.com">Home</a>
+                </li>
+
+                <li >
+                    <a href="/">DateCoder v1</a>
+                </li>
+
+                <li >
+                    <a href="/v2/">DateCoder - Beta V2</a>
+                </li>
+                <!--  <li>
+                     <a href="#subscribe">Subscribe</a>
+                 </li>
+                 <li>
+                     <a href="#getinvolved">Get Involved</a>
+                 </li>
+                 <li>
+                     <a href="#getintouch">Contact</a>
+                 </li> -->
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- PART 1 -->
+<div class="part1 container-fluid" id="home">
+    <div class="row animated fadeInDownBig">
+        <div class="col-md-12 col-md-offset-12">
+            <div class="text-center">
+                <h1>Date and Time Formatter</h1>
+                <form id="dateTimeForm">
+                    <label for="year">Year:</label>
+                    <select class="form-control" id="year" name="year">
+                        <!-- Add year options as needed -->
+                        <option value="YYYY">YYYY</option>
+                        <option value="YY">YY</option>
+                    </select>
+
+                    <label for="month">Month:</label>
+                    <select class="form-control" id="month" name="month">
+                        <!-- Add month options as needed -->
+                        <option value="MM">MM</option>
+                        <option value="M">M</option>
+                    </select>
+
+                    <label for="day">Day:</label>
+                    <select class="form-control" id="day" name="day">
+                        <!-- Add day options as needed -->
+                        <option value="DD">DD</option>
+                        <option value="D">D</option>
+                    </select>
+
+                    <label for="hour">Hour:</label>
+                    <select class="form-control" id="hour" name="hour">
+                        <!-- Add hour options as needed -->
+                        <option value="HH">HH</option>
+                        <option value="H">H</option>
+                    </select>
+
+                    <label for="minute">Minute:</label>
+                    <select class="form-control" id="minute" name="minute">
+                        <!-- Add minute options as needed -->
+                        <option value="mm">mm</option>
+                        <option value="m">m</option>
+                    </select>
+
+                    <label for="second">Second:</label>
+                    <select class="form-control" id="second" name="second">
+                        <!-- Add second options as needed -->
+                        <option value="ss">ss</option>
+                        <option value="s">s</option>
+                    </select>
+
+                    <label for="separator">Separator:</label>
+                    <input type="text" id="separator" name="separator" placeholder="-">
+
+                    <button type="button" onclick="formatDateTime()">Format Date and Time</button>
+                </form>
+
+                <div id="result"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  function formatDateTime(){
+    const year = document.getElementById('year').value;
+    const month = document.getElementById('month').value;
+    const day = document.getElementById('day').value;
+    const hour = document.getElementById('hour').value;
+    const minute = document.getElementById('minute').value;
+    const second = document.getElementById('second').value;
+    const separator = document.getElementById('separator').value;
+
+    // Create the date format string based on user selections
+    const dateFormat = year + separator + month + separator + day;
+    const timeFormat = hour + separator + minute + separator + second;
+
+    // Combine date and time formats as needed
+    const dateTimeFormat = dateFormat + ' ' + timeFormat;
+
+    document.getElementById('result').textContent = `Formatted Date and Time: ${dateTimeFormat}`;
+  }
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2TWT3DJXFP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+
+  gtag('config', 'G-2TWT3DJXFP');
+</script>
+</body>
+</html>
