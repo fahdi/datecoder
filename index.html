@@ -14,10 +14,11 @@
     <!--[if lt IE 9]>
     	<script src="js/respond.min.js"></script>
     <![endif]-->
-    <link rel="shortcut icon" href="img/icon.svg" sizes="any" type="image/svg+xml">
+    <link rel="shortcut icon" href="img/icon.svg" sizes="any" type="image/svg+xml">    
 </head>
 
 <body>
+
     <!-- NAVBAR -->
     <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
         <div class="container">
@@ -34,7 +35,7 @@
                     <li class="active">
                         <a href="#home">Home</a>
                     </li>
-                    <li>
+                   <!--  <li>
                         <a href="#subscribe">Subscribe</a>
                     </li>
                     <li>
@@ -42,7 +43,7 @@
                     </li>
                     <li>
                         <a href="#getintouch">Contact</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -81,9 +82,9 @@
                         <div class='form-group'>
                             <label for="element1">Element</label>
                             <select class="form-control" id="element1" name="code[element1]">
-                                <option value="day" selected="selected">Day</option>
+                                <option value="day">Day</option>
                                 <option value="month">Month</option>
-                                <option value="year">Year</option>
+                                <option value="year"  selected="selected">Year</option>
                                 <option value="week">Week</option>
                                 <option value="hour">Hour</option>
                                 <option value="minute">Minute</option>
@@ -115,9 +116,9 @@
                         <div class='form-group'>
                             <label for="element3">Element</label>
                             <select class="form-control" id="element3" name="code[element3]">
-                                <option value="day">Day</option>
+                                <option value="day" selected="selected">Day</option>
                                 <option value="month">Month</option>
-                                <option value="year" selected="selected">Year</option>
+                                <option value="year" >Year</option>
                                 <option value="week">Week</option>
                                 <option value="hour">Hour</option>
                                 <option value="minute">Minute</option>
@@ -128,313 +129,76 @@
                             </select>
                         </div>
                     </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="element4">Element</label>
-                            <select class="form-control" id="element4" name="code[element4]">
-                                <option value="day">Day</option>
-                                <option value="month">Month</option>
-                                <option value="year">Year</option>
-                                <option value="week">Week</option>
-                                <option value="hour" selected="selected">Hour</option>
-                                <option value="minute">Minute</option>
-                                <option value="second">Second</option>
-                                <option value="meridiem">Meridiem</option>
-                                <option value="other">Other</option>
-                                <option value="">Empty</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="element5">Element</label>
-                            <select class="form-control" id="element5" name="code[element5]">
-                                 <option value="day">Day</option>
-                                <option value="month">Month</option>
-                                <option value="year">Year</option>
-                                <option value="week">Week</option>
-                                <option value="hour">Hour</option>
-                                <option value="minute" selected="selected">Minute</option>
-                                <option value="second">Second</option>
-                                <option value="meridiem">Meridiem</option>
-                                <option value="other">Other</option>
-                                <option value="">Empty</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="element6">Element</label>
-                            <select class="form-control" id="element6" name="code[element6]">
-                                <option value="day">Day</option>
-                                <option value="month">Month</option>
-                                <option value="year">Year</option>
-                                <option value="week">Week</option>
-                                <option value="hour">Hour</option>
-                                <option value="minute">Minute</option>
-                                <option value="second" selected="selected">Second</option>
-                                <option value="meridiem">Meridiem</option>
-                                <option value="other">Other</option>
-                                <option value="">Empty</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="element7">Element</label>
-                            <select class="form-control" id="element7" name="code[element7]">
-                                <option value="day">Day</option>
-                                <option value="month">Month</option>
-                                <option value="year">Year</option>
-                                <option value="week">Week</option>
-                                <option value="hour">Hour</option>
-                                <option value="minute">Minute</option>
-                                <option value="second">Second</option>
-                                <option value="meridiem" selected="selected">Meridiem</option>
-                                <option value="other">Other</option>
-                                <option value="">Empty</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="element8">Element</label>
-                            <select class="form-control" id="element8" name="code[element8]">
-                                <option value="day">Day</option>
-                                <option value="month">Month</option>
-                                <option value="year">Year</option>
-                                <option value="week">Week</option>
-                                <option value="hour">Hour</option>
-                                <option value="minute">Minute</option>
-                                <option value="second">Second</option>
-                                <option value="meridiem">Meridiem</option>
-                                <option value="other">Other</option>
-                                <option value="" selected="selected">Empty</option>
-                            </select>
-                        </div>
-                    </div>
+                   
                 </div>
-
 
                 <div class='row'  id='formats'>
                     <div class='col-md-1 col-md-offset-2'>
                         <div class='form-group'>
                             <label for="format1">Format</label>
                             <select class="form-control" id="format1" name="code[format1]">
-                                <option value="" selected="selected">1 ... 31</option>
-                                <option value="">01 ... 31</option>
-                                <option value="">Monday</option>
-                                <option value="">Mon</option>
-                                <option value="">st, nd, rd, ...</option>
+                                <option value="Y">2024</option>
+                                <option value="y">24</option>
                             </select>
                         </div>
                     </div>
-                    <div class='col-md-1'>
+                    <div class='col-md-1'>                    
                         <div class='form-group'>
                             <label for="format2">Format</label>
                             <select class="form-control" id="format2" name="code[format2]">
-                                <option value="" selected="selected">1 ... 12</option>
-                                <option value="">01 ... 12</option>
-                                <option value="">January</option>
-                                <option value="">Jan</option>
-                            </select>
-                        </div>
+                                <option value="n">1 ... 12</option>
+                                <option value="m">01 ... 12</option>
+                                <option value="F">January</option>
+                                <option value="M">Jan</option>
+                            </select>                    
+                        </div>                                              
                     </div>
                     <div class='col-md-1'>
                         <div class='form-group'>
                             <label for="format3">Format</label>
                             <select class="form-control" id="format3" name="code[format3]">
-                                <option value="" selected="selected">2013</option>
-                                <option value="">13</option>
+                                <option value="j">1 ... 31</option>
+                                <option value="d">01 ... 31</option>
                             </select>
                         </div>
                     </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="format4">Format</label>
-                            <select class="form-control" id="format4" name="code[format4]">
-                                <option value="" selected="selected">1 ... 12</option>
-                                <option value="">01 ... 12</option>
-                                <option value="">1 ... 24</option>
-                                <option value="">01 ... 24</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="format5">Format</label>
-                            <select class="form-control" id="format5" name="code[format5]">
-                                <option value="" selected="selected">00 ... 59</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="format6">Format</label>
-                            <select class="form-control" id="format6" name="code[format6]">
-                                <option value="" selected="selected">00 ... 59</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="format7">Format</label>
-                            <select class="form-control" id="format7" name="code[format7]">
-                                 <option value="" selected="selected">am/pm</option>
-                                 <option value="">AM/PM</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="format8">Format</label>
-                            <select class="form-control" id="format8" name="code[format8]">
-                                <option value="" selected="selected">Empty</option>      
-                            </select>
-                        </div>
-                    </div>
+                                      
                 </div>
 
                 <div class='row' id='dividers'>
                     <div class='col-md-1 col-md-offset-2-5'>
                         <div class='form-group'>
                             <label for="divider1">Divider</label>
-                            <select class="form-control" id="divider1" name="code[divider1]">
-                                <option value="">None</option>  
-                                <option value="" selected="selected">Space</option>
-                                <option value="">Two Spaces</option>
-                                <option value="">Two Spaces</option>
-                                <option value=""> - </option>
-                                <option value=""> : </option>
-                                <option value=""> . </option>
-                                <option value=""> , </option>
-                                <option value=""> | </option>
-                                <option value=""> [ </option>
-                                <option value=""> ] </option>
-                            </select>
+                            <select class="form-control" id="divider1" name="code[divider1]">                              
+                                <option value="Space">Space</option> <!-- Added a space character -->
+                                <option value="Space2">Two Spaces</option> <!-- Added two space characters -->
+                                <option value="-">-</option>
+                                <option value=":">:</option>
+                                <option value=".">.</option>
+                                <option value=",">,</option>
+                                <option value="|">|</option>
+                                <option value="[">[</option>
+                                <option value="]">]</option>
+                            </select>                            
                         </div>
                     </div>
                     <div class='col-md-1'>
                         <div class='form-group'>
                             <label for="divider2">Divider</label>
-                            <select class="form-control" id="divider2" name="code[divider2]">
-                                <option value="">None</option>  
-                                <option value="" selected="selected">Space</option>
-                                <option value="">Two Spaces</option>
-                                <option value="">Two Spaces</option>
-                                <option value=""> - </option>
-                                <option value=""> : </option>
-                                <option value=""> . </option>
-                                <option value=""> , </option>
-                                <option value=""> | </option>
-                                <option value=""> [ </option>
-                                <option value=""> ] </option>
-                            </select>
+                            <select class="form-control" id="divider2" name="code[divider2]">                                
+                                <option value="Space">Space</option> <!-- Added a space character -->
+                                <option value="Space2">Two Spaces</option> <!-- Added two space characters -->
+                                <option value="-">-</option>
+                                <option value=":">:</option>
+                                <option value=".">.</option>
+                                <option value=",">,</option>
+                                <option value="|">|</option>
+                                <option value="[">[</option>
+                                <option value="]">]</option>
+                            </select>     
                         </div>
                     </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="divider3">Divider</label>
-                            <select class="form-control" id="divider3" name="code[divider3]">
-                                <option value="">None</option>  
-                                <option value="" selected="selected">Space</option>
-                                <option value="">Two Spaces</option>
-                                <option value="">Two Spaces</option>
-                                <option value=""> - </option>
-                                <option value=""> : </option>
-                                <option value=""> . </option>
-                                <option value=""> , </option>
-                                <option value=""> | </option>
-                                <option value=""> [ </option>
-                                <option value=""> ] </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="divider4">Divider</label>
-                            <select class="form-control" id="divider4" name="code[divider4]">
-                               <option value="">None</option>  
-                                <option value="" selected="selected">Space</option>
-                                <option value="">Two Spaces</option>
-                                <option value="">Two Spaces</option>
-                                <option value=""> - </option>
-                                <option value=""> : </option>
-                                <option value=""> . </option>
-                                <option value=""> , </option>
-                                <option value=""> | </option>
-                                <option value=""> [ </option>
-                                <option value=""> ] </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="divider5">Divider</label>
-                            <select class="form-control" id="divider5" name="code[divider5]">
-                                <option value="">None</option>  
-                                <option value="" selected="selected">Space</option>
-                                <option value="">Two Spaces</option>
-                                <option value="">Two Spaces</option>
-                                <option value=""> - </option>
-                                <option value=""> : </option>
-                                <option value=""> . </option>
-                                <option value=""> , </option>
-                                <option value=""> | </option>
-                                <option value=""> [ </option>
-                                <option value=""> ] </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="divider6">Divider</label>
-                            <select class="form-control" id="divider6" name="code[divider6]">
-                                <option value="">None</option>  
-                                <option value="" selected="selected">Space</option>
-                                <option value="">Two Spaces</option>
-                                <option value="">Two Spaces</option>
-                                <option value=""> - </option>
-                                <option value=""> : </option>
-                                <option value=""> . </option>
-                                <option value=""> , </option>
-                                <option value=""> | </option>
-                                <option value=""> [ </option>
-                                <option value=""> ] </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="divider7">Divider</label>
-                            <select class="form-control" id="divider7" name="code[divider7]">
-                                <option value="">None</option>  
-                                <option value="" selected="selected">Space</option>
-                                <option value="">Two Spaces</option>
-                                <option value="">Two Spaces</option>
-                                <option value=""> - </option>
-                                <option value=""> : </option>
-                                <option value=""> . </option>
-                                <option value=""> , </option>
-                                <option value=""> | </option>
-                                <option value=""> [ </option>
-                                <option value=""> ] </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='row' id='dividers'>
-                        <div class='col-md-6 col-md-offset-3'>
-                            
-                            Text: <input type="text" name="txtOption" id="txtOption" placeholder="Which Option is it?" class="InputField" />
-                            </br>
-                            </br>
-                            Value: <input type="text" name="txtID" id="txtID" placeholder="ID Number" class="InputField" />
-                            </br>
-                            </br>
-                            <input type="text" name="txtItem" id="txtItem" placeholder="Which item is it?" class="InputField" />
-                            
-                        </div>
-                    </div>
+                    
                 </div>
             </form>
         </div>
@@ -444,7 +208,10 @@
             </div>
         </div>
     </div>
-    <!-- PART 2 -->
+  
+
+    <!--
+          
     <div class="part2" id="subscribe">
         <div class="container">
             <div class="text-center">
@@ -463,9 +230,6 @@
     </div>
 
     <div class="part3" id="getinvolved">
-        <a href="https://github.com/fahdi/datecoder/"  target="_blank">
-            <img style="float:right;position:fixed; top: 80px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
-        </a>
         <div class="container">
             <div class="text-center">
 
@@ -483,7 +247,7 @@
     </div>
 
 
-    <!-- PART 4 -->
+    
     <div class="part4" id="getintouch">
         <div class="container">
             <div class="text-center">
@@ -507,7 +271,7 @@
                 </div>
                 <br>
                 <br>
-                <!-- SOCIAL -->
+                
                 <div class="col-md-6 text-center">
                     <div class="social text-center">
                         <a href="http://www.facebook.com/datecoder" class="icons fb"></a>
@@ -522,6 +286,7 @@
                 </div>
             </div>
         </div>
+    -->
     </div>
     <!-- JAVASCRIPTS -->
     <script src="js/jquery.js"></script>
@@ -534,15 +299,16 @@
         });
     </script>
     <script src="js/bootstrap.js"></script>
+    
+    <!-- Google tag (gtag.js) -->   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2TWT3DJXFP"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    ga('create', 'UA-45887309-1', 'datecoder.com');
-    ga('send', 'pageview');
-
+    gtag('config', 'G-2TWT3DJXFP');
     </script>
+
 </body>
 </html>
