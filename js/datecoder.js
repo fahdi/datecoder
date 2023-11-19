@@ -1,72 +1,60 @@
 $(document).ready(function () {
-     // Function to update format options based on the selected element
-     function updateFormatOptions(elementId, formatId) {
-         var selectedElement = $('#' + elementId).val();
-         var formatDropdown = $('#' + formatId);
- 
-         formatDropdown.empty(); // Clear existing options
- 
-         // Define options based on the selected element
-         switch(selectedElement) {
-             case 'day':
-                 formatDropdown.append('<option value="d">Day (01-31)</option>');
-                 formatDropdown.append('<option value="j">Day (1-31)</option>');
-                 break;
-             case 'month':
-                 formatDropdown.append('<option value="m">Month (01-12)</option>');
-                 formatDropdown.append('<option value="F">Month (January-December)</option>');
-                 break;
-             // Add cases for other elements like 'year', 'hour', etc.
-         }
-     }
- 
-     // Function to update divider options based on the selected divider
-     function updateDividerOptions(dividerId, dividerOptionId) {
-         var selectedDivider = $('#' + dividerId).val();
-         var dividerOptionDropdown = $('#' + dividerOptionId);
- 
-         dividerOptionDropdown.empty(); // Clear existing options
- 
-         // Define options based on the selected divider
-         switch(selectedDivider) {
-             case 'space':
-                 dividerOptionDropdown.append('<option value=" ">Single Space</option>');
-                 break;
-             case 'doubleSpace':
-                 dividerOptionDropdown.append('<option value="  ">Double Space</option>');
-                 break;
-             // Add cases for other dividers like 'comma', 'dash', etc.
-         }
-     }
- 
-     // Event listeners for each dropdown in the "elements" row
-     $('#element1').on('change', function() {
-         updateFormatOptions('element1', 'format1');
-     });
-     $('#element2').on('change', function() {
-         updateFormatOptions('element2', 'format2');
-     });
-     $('#element3').on('change', function() {
-         updateFormatOptions('element3', 'format3');
-     });
- 
-     // Event listeners for each dropdown in the "dividers" row
-     $('#divider1').on('change', function() {
-         updateDividerOptions('divider1', 'dividerOption1');
-     });
-     $('#divider2').on('change', function() {
-         updateDividerOptions('divider2', 'dividerOption2');
-     });
-     $('#divider3').on('change', function() {
-         updateDividerOptions('divider3', 'dividerOption3');
-     });
- 
-     // Initialize the format and divider options based on the default selected elements
-     updateFormatOptions('element1', 'format1');
-     updateFormatOptions('element2', 'format2');
-     updateFormatOptions('element3', 'format3');
-     updateDividerOptions('divider1', 'dividerOption1');
-     updateDividerOptions('divider2', 'dividerOption2');
-     updateDividerOptions('divider3', 'dividerOption3');
- });
- 
+    // Function to map selected element and format to PHP date format symbol
+    function mapFormatToPHP(element, format) {
+        console.log('Mapping element: ' + element + ', Format: ' + format);
+
+        // Example mapping logic. Adjust according to your dropdown options       
+        
+
+        return format; // Return an empty string if no match is found
+    }
+
+    // Function to update the PHP date format displayed
+   // Function to update the PHP date format displayed
+// Function to update the PHP date format displayed
+function updateDateFormatDisplay() {
+    console.log('Updating date format display');
+    var dateFormat = '';
+
+    // Loop through each element and format pair
+    for (var i = 1; i <= 3; i++) {
+        var element = $('#element' + i).val();
+        var format = $('#format' + i).val();
+        var divider = $('#divider' + i).val(); // Get selected divider
+
+        console.log('Element ' + i + ': ' + element + ', Format: ' + format);
+
+        // Get PHP format part
+        var phpFormatPart = mapFormatToPHP(element, format);
+        console.log('Mapped PHP format part for element ' + i + ': ' + phpFormatPart);
+
+        // Add the format part to the result string
+        dateFormat += phpFormatPart;
+
+        // Add divider if not the last element
+        if (i < 3) {
+            if (divider === 'Space') {
+                dateFormat += ' ';
+            } else if (divider === 'Space2') {
+                dateFormat += '  ';
+            } else if (divider === '-') {
+                dateFormat += '-';
+            } // Add more divider options as needed
+        }
+    }
+
+    console.log('Final PHP date format: ' + dateFormat);
+    // Updating the <pre> content
+    $('.col-md-4.col-md-offset-4.text-center.padding-pre pre').text("date('" + dateFormat + "');");
+}
+
+    // Event listeners for changes in dropdowns
+    $('#elements select, #formats select, #dividers select').on('change', function () {
+        console.log('Dropdown changed, updating format display');
+        updateDateFormatDisplay();
+    });
+
+    // Initialize the display on page load
+    console.log('Initializing date format display on page load');
+    updateDateFormatDisplay();
+});
