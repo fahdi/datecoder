@@ -1,325 +1,134 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>DateCoder - Date and Time code for PHP, MySQL and many more</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="css/main.css" rel="stylesheet" media="screen">
-    <link href="css/animate.css" rel="stylesheet" media="screen">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    	<script src="js/respond.min.js"></script>
-    <![endif]-->
-    <link rel="shortcut icon" href="img/icon.svg" sizes="any" type="image/svg+xml">    
+    <title>DateCoder - Generate Date and Time code for PHP</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
-
 <body>
 
-    <!-- NAVBAR -->
-    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav" id="nav">
-                    <li class="active">
-                        <a href="https://www.fahdmurtaza.com">Home</a>
-                    </li>
-
-                    <li >
-                        <a href="https://www.fahdmurtaza.com/datecoder">DateCoder v1</a>
-                    </li>
-
-                    <li >
-                        <a href="https://www.fahdmurtaza.com/datecoder/v2/">DateCoder - Beta V2</a>
-                    </li>
-                   <!--  <li>
-                        <a href="#subscribe">Subscribe</a>
-                    </li>
-                    <li>
-                        <a href="#getinvolved">Get Involved</a>
-                    </li>
-                    <li>
-                        <a href="#getintouch">Contact</a>
-                    </li> -->
-                </ul>
-            </div>
+<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="https://www.fahdmurtaza.com">Home</a></li>
+                <li><a href="https://www.fahdmurtaza.com/datecoder">DateCoder v1</a></li>
+            </ul>
         </div>
     </div>
-    <!-- PART 1 -->
-    <div class="part1 container-fluid" id="home">
-        <div class="row animated fadeInDownBig">
-            <div class="col-md-12 col-md-offset-12">
-                <div class="text-center">
-                    <img src="img/datecoder.svg" width="300px" alt="Date Coder"/>
-                    <h1>Generate Date and Time code for PHP</h1>
-                    <!--<p>Please select the language and different date or time fields to create your code.</p>-->
-                </div>
-            </div>
-        </div>
-        <div class='row '>
-            <div class='col-md-1'>&nbsp;</div>
-        </div>
-        <div class='row '>
-            <div class='col-md-1'>&nbsp;</div>
-        </div>
-        <div class="row animated fadeInUpBig text-center">
-            <form action="#" method="post">
+</nav>
 
-<!--                <div class='row'>-->
-<!--                    <div class='col-md-2 col-md-offset-5'>-->
-<!--                        <div class='form-group text-center'>-->
-<!--                            <label for="lang">Language</label>-->
-<!--                            <select class="form-control" id="lang" name="code[lang]">-->
-<!--                                <option value="php" selected="selected">PHP</option>-->
-<!--                                <option value="mysql" disabled>MySQL</option>-->
-<!--                            </select>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-                <div class='row'  id='elements'>
-                    <div class='col-md-1 col-md-offset-2'>
-                        <div class='form-group'>
-                            <label for="element1">Element</label>
-                            <select class="form-control" id="element1" name="code[element1]">
-                                <option value="day">Day</option>
-                                <option value="month">Month</option>
-                                <option value="year"  selected="selected">Year</option>
-                                <option value="week">Week</option>
-                                <option value="hour">Hour</option>
-                                <option value="minute">Minute</option>
-                                <option value="second">Second</option>
-                                <option value="meridiem">Meridiem</option>
-                                <option value="other">Other</option>
-                                <option value="">Empty</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="element2">Element</label>
-                            <select class="form-control" id="element2" name="code[element2]">
-                                <option value="day">Day</option>
-                                <option value="month" selected="selected">Month</option>
-                                <option value="year">Year</option>
-                                <option value="week">Week</option>
-                                <option value="hour">Hour</option>
-                                <option value="minute">Minute</option>
-                                <option value="second">Second</option>
-                                <option value="meridiem">Meridiem</option>
-                                <option value="other">Other</option>
-                                <option value="">Empty</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="element3">Element</label>
-                            <select class="form-control" id="element3" name="code[element3]">
-                                <option value="day" selected="selected">Day</option>
-                                <option value="month">Month</option>
-                                <option value="year" >Year</option>
-                                <option value="week">Week</option>
-                                <option value="hour">Hour</option>
-                                <option value="minute">Minute</option>
-                                <option value="second">Second</option>
-                                <option value="meridiem">Meridiem</option>
-                                <option value="other">Other</option>
-                                <option value="">Empty</option>
-                            </select>
-                        </div>
-                    </div>
-                   
-                </div>
-
-                <div class='row'  id='formats'>
-                    <div class='col-md-1 col-md-offset-2'>
-                        <div class='form-group'>
-                            <label for="format1">Format</label>
-                            <select class="form-control" id="format1" name="code[format1]">
-                                <option value="Y">2024</option>
-                                <option value="y">24</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='col-md-1'>                    
-                        <div class='form-group'>
-                            <label for="format2">Format</label>
-                            <select class="form-control" id="format2" name="code[format2]">
-                                <option value="n">1 ... 12</option>
-                                <option value="m">01 ... 12</option>
-                                <option value="F">January</option>
-                                <option value="M">Jan</option>
-                            </select>                    
-                        </div>                                              
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="format3">Format</label>
-                            <select class="form-control" id="format3" name="code[format3]">
-                                <option value="j">1 ... 31</option>
-                                <option value="d">01 ... 31</option>
-                            </select>
-                        </div>
-                    </div>
-                                      
-                </div>
-
-                <div class='row' id='dividers'>
-                    <div class='col-md-1 col-md-offset-2-5'>
-                        <div class='form-group'>
-                            <label for="divider1">Divider</label>
-                            <select class="form-control" id="divider1" name="code[divider1]">                              
-                                <option value=" ">Space</option> <!-- Added a space character -->
-                                <option value="  ">Two Spaces</option> <!-- Added two space characters -->
-                                <option value="-">-</option>
-                                <option value=":">:</option>
-                                <option value=".">.</option>
-                                <option value=",">,</option>
-                                <option value="|">|</option>
-                                <option value="[">[</option>
-                                <option value="]">]</option>
-                            </select>                            
-                        </div>
-                    </div>
-                    <div class='col-md-1'>
-                        <div class='form-group'>
-                            <label for="divider2">Divider</label>
-                            <select class="form-control" id="divider2" name="code[divider2]">                                
-                                <option value=" ">Space</option> <!-- Added a space character -->
-                                <option value="  ">Two Spaces</option> <!-- Added two space characters -->
-                                <option value="-">-</option>
-                                <option value=":">:</option>
-                                <option value=".">.</option>
-                                <option value=",">,</option>
-                                <option value="|">|</option>
-                                <option value="[">[</option>
-                                <option value="]">]</option>
-                            </select>     
-                        </div>
-                    </div>
-                    
-                </div>
-            </form>
-        </div>
-        <div class='row animated fadeInUpBig'>
-            <div class='col-md-4 col-md-offset-4 text-center padding-pre'>
-                <pre>date('j n Y g:i:s');</pre>
-            </div>
-        </div>
-    </div>
-  
-
-    <!--
-          
-    <div class="part2" id="subscribe">
-        <div class="container">
-            <div class="text-center">
-                <h1>Stay tuned for updates</h1>
-                <br>
-                <p>If you want to get notified when we release a new feature or update, enter your email below. We will send you a message so that you can check out our new features. We won't spam. Promise.</p>
-                <br>
-                <form action="PLACEHOLDER_FOR_MAILCHIMP" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form">
-                    <button type="submit" class="btn btn-lg btn-primary" style="float: right">Subscribe</button>
-                    <div style="overflow: hidden; padding-right: .5em;">
-                        <input name="EMAIL" id="mce-EMAIL" type="email" class="form-control input-lg" placeholder="Your email adress" required />
-                    </div>
-                </form>
-            </div>
+<div id="home" class="part1 container-fluid">
+    <div class="row animated fadeInDownBig">
+        <div class="col-md-12 text-center">
+            <img src="img/datecoder.svg" alt="Date Coder" width="300">
+            <h1>Generate Date and Time code for PHP</h1>
         </div>
     </div>
 
-    <div class="part3" id="getinvolved">
-        <div class="container">
-            <div class="text-center">
-
-                <div class="col-md-12" id="contact">
-
-                    <h1>Get Involved</h1>
-                    <p>
-                        It is a fun project for me and so far, I am the only developer on the project. I would love if anyone gets involved in the project. If you want to improve the project is any way, fork the project at
-                        <a href="https://github.com/fahdi/datecoder" target="_blank">GitHub</a> and make your changes. Once you are done, send a pull request and your code will be merged to the repository and pushed to the live site at
-                        <a href="http://www.datecoder.com">www.datecoder.com</a>
-                    </p>
+    <div class="row animated fadeInUpBig">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="row" id="date-time-selectors">
+                <div class="col-md-4">
+                    <h3>Elements</h3>
+                    <div class="form-group">
+                        <select id="element1" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <select id="element2" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <select id="element3" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>Formats</h3>
+                    <div class="form-group">
+                        <select id="format1" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <select id="format2" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <select id="format3" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>Dividers</h3>
+                    <div class="form-group">
+                        <select id="divider1" class="form-control">
+                            <option value=" ">Space</option>
+                            <option value="  ">Two Spaces</option>
+                            <option value="-">-</option>
+                            <option value=":">:</option>
+                            <option value=".">.</option>
+                            <option value=",">,</option>
+                            <option value="|">|</option>
+                            <option value="[">[</option>
+                            <option value="]">]</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select id="divider2" class="form-control">
+                            <option value=" ">Space</option>
+                            <option value="  ">Two Spaces</option>
+                            <option value="-">-</option>
+                            <option value=":">:</option>
+                            <option value=".">.</option>
+                            <option value=",">,</option>
+                            <option value="|">|</option>
+                            <option value="[">[</option>
+                            <option value="]">]</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="row animated fadeInUpBig">
+        <div class="col-md-8 col-md-offset-2 text-center padding-pre">
+            <h3>Generated PHP Code</h3>
+            <pre><code id="phpOutput"></code></pre>
+        </div>
+    </div>
+</div>
 
-    
-    <div class="part4" id="getintouch">
-        <div class="container">
-            <div class="text-center">
-                <h1>Get in touch</h1>
-                <br>
-                <br>
-                <p>Probably the best way to reach us is filling in the following form. Don't forget to like a our facebook page.</p>
-                <br>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <form method="post" action="php/contactmail.php">
-                        <input name="name" type="text" class="form-control input-lg" placeholder="Your Name" required />
-                        <br>
-                        <input name="email" type="email" class="form-control input-lg" placeholder="Your email adress" required />
-                        <br>
-                        <textarea name="content" class="form-control" rows="5" placeholder="Your message" required></textarea>
-                        <br>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Send message</button>
-                    </form>
+<footer class="part4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Connect with us</h2>
+                <div class="social">
+                    <a href="https://www.facebook.com/iSuperCoder" class="icons fb"></a>
+                    <a href="https://www.twitter.com/fahdmurtaza" class="icons twitter"></a>
+                    <a href="mailto:info@fahdmurtaza.com" class="icons mail"></a>
+                    <a href="https://www.linkedin.com/in/fahdmurtaza/" class="icons linkedin"></a>
                 </div>
-                <br>
-                <br>
-                
-                <div class="col-md-6 text-center">
-                    <div class="social text-center">
-                        <a href="http://www.facebook.com/datecoder" class="icons fb"></a>
-                        <a href="http://www.twitter.com/datecoder" class="icons twitter"></a>
-                        <a href="mailto:info@datecoder.com" class="icons mail"></a>
-                        <br>
-                        <br>
-                        <a href="http://www.linkedin.com/datecoder" class="icons linkedin"></a>
-                        <a href="http://plus.google.com/datecoder" class="icons google"></a>
-                        <a href="skype:fahd.murtaza?chat" class="icons skype"></a>
-                    </div>
-                </div>
+                <p>&copy; 2024 DateCoder. All rights reserved.</p>
             </div>
         </div>
-    -->
     </div>
-    <!-- JAVASCRIPTS -->
-    <script src="js/jquery.js"></script>
-    <script src="js/datecoder.js"></script>
-    <script src="js/jquery.scrollTo.js"></script>
-    <script src="js/jquery.nav.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#nav').onePageNav();
-        });
-    </script>
-    <script src="js/bootstrap.js"></script>
-    
-    <!-- Google tag (gtag.js) -->   
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2TWT3DJXFP"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+</footer>
 
-    gtag('config', 'G-2TWT3DJXFP');
-    </script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery.nav.js"></script>
+<script src="js/jquery.scrollTo.js"></script>
+<script src="js/respond.js"></script>
+<script src="js/datecoder.js"></script>
 
 </body>
 </html>
