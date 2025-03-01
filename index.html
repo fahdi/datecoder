@@ -3,132 +3,702 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DateCoder - Generate Date and Time code for PHP</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>PHP Date Format Builder</title>
+    <style>
+        /* Swiss Design Principles */
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            color: #222;
+            background-color: #f9f9f9;
+        }
+        .topnav {
+            background-color: #222;
+            color: white;
+            display: flex;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .topnav a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: inline-block;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        .topnav a.active {
+            background-color: #000;
+            font-weight: 500;
+        }
+        .logo-container {
+            text-align: center;
+            margin: 40px 0 30px;
+        }
+        .logo {
+            font-size: 30px;
+            font-weight: 700;
+            font-family: monospace;
+            color: #222;
+            letter-spacing: -1px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            margin-top: 0;
+            margin-bottom: 50px;
+            font-weight: 300;
+            color: #222;
+            letter-spacing: -0.5px;
+        }
+        .selectors-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+            color: #222;
+            text-transform: uppercase;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .format-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+        .format-group {
+            flex: 1;
+            min-width: 180px;
+        }
+        .label {
+            display: block;
+            font-weight: 400;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+        select {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 0;
+            background-color: white;
+            font-family: inherit;
+            font-size: 14px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 1em;
+        }
+        select:focus {
+            outline: none;
+            border-color: #222;
+        }
+        .result {
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+            text-align: center;
+            font-family: monospace;
+            font-size: 18px;
+            border-left: 4px solid #222;
+        }
+        .country-select {
+            margin-top: 30px;
+        }
+        .country-format {
+            cursor: pointer;
+            padding: 12px;
+            border: 1px solid #ddd;
+            margin-bottom: 8px;
+            background-color: white;
+            transition: background-color 0.2s;
+        }
+        .country-format:hover {
+            background-color: #f2f2f2;
+        }
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .search-box:focus {
+            outline: none;
+            border-color: #222;
+        }
+        .country-formats {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 30px;
+            padding-right: 5px;
+        }
+        .format-builder {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 30px 0;
+            justify-content: center;
+        }
+        .format-item {
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            cursor: move;
+            display: flex;
+            align-items: center;
+        }
+        .format-item:hover {
+            background-color: #e9e9e9;
+        }
+        .format-item .remove {
+            margin-left: 8px;
+            color: #999;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .format-item .remove:hover {
+            color: #222;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: inherit;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s;
+        }
+        .btn-primary {
+            background-color: #222;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #000;
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        .btn-default {
+            background-color: #ddd;
+            color: #222;
+        }
+        .btn-default:hover {
+            background-color: #ccc;
+        }
+        .confirm-clear {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        .output-section {
+            margin-top: 40px;
+        }
+        .output-title {
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #222;
+        }
+        .code-block {
+            font-family: monospace;
+            background-color: #f2f2f2;
+            padding: 15px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
 
-<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+        <div class="logo-container">
+            <div class="logo"><img src="img/datecoder.svg" alt="DateCoder Logo" style="width:auto; height: 50px;"></div>
         </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="https://www.fahdmurtaza.com">Home</a></li>
-                <li><a href="https://www.fahdmurtaza.com/datecoder">DateCoder v1</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<div id="home" class="part1 container-fluid">
-    <div class="row animated fadeInDownBig">
-        <div class="col-md-12 text-center">
-            <img src="img/datecoder.svg" alt="Date Coder" width="300">
-            <h1>Generate Date and Time code for PHP</h1>
-        </div>
-    </div>
-
-    <div class="row animated fadeInUpBig">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="row" id="date-time-selectors">
-                <div class="col-md-4">
-                    <h3>Elements</h3>
-                    <div class="form-group">
-                        <select id="element1" class="form-control"></select>
-                    </div>
-                    <div class="form-group">
-                        <select id="element2" class="form-control"></select>
-                    </div>
-                    <div class="form-group">
-                        <select id="element3" class="form-control"></select>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <h3>Formats</h3>
-                    <div class="form-group">
-                        <select id="format1" class="form-control"></select>
-                    </div>
-                    <div class="form-group">
-                        <select id="format2" class="form-control"></select>
-                    </div>
-                    <div class="form-group">
-                        <select id="format3" class="form-control"></select>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <h3>Dividers</h3>
-                    <div class="form-group">
-                        <select id="divider1" class="form-control">
-                            <option value=" ">Space</option>
-                            <option value="  ">Two Spaces</option>
-                            <option value="-">-</option>
-                            <option value=":">:</option>
-                            <option value=".">.</option>
-                            <option value=",">,</option>
-                            <option value="|">|</option>
-                            <option value="[">[</option>
-                            <option value="]">]</option>
+        
+        <h1>Generate Date and Time code for PHP</h1>
+        
+        <div class="selectors-container">
+            <div>
+                <div class="section-title">Format Components</div>
+                <div class="format-section">
+                    <div class="format-group">
+                        <span class="label">Day Format</span>
+                        <select id="dayFormat">
+                            <option value="">Select format</option>
+                            <option value="d">d - Day with leading zeros (01-31)</option>
+                            <option value="j">j - Day without leading zeros (1-31)</option>
+                            <option value="D">D - Day abbreviation (Mon-Sun)</option>
+                            <option value="l">l - Full day name (Monday-Sunday)</option>
+                            <option value="S">S - Day ordinal suffix (st,nd,rd,th)</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <select id="divider2" class="form-control">
-                            <option value=" ">Space</option>
-                            <option value="  ">Two Spaces</option>
-                            <option value="-">-</option>
-                            <option value=":">:</option>
-                            <option value=".">.</option>
-                            <option value=",">,</option>
-                            <option value="|">|</option>
-                            <option value="[">[</option>
-                            <option value="]">]</option>
+                    
+                    <div class="format-group">
+                        <span class="label">Month Format</span>
+                        <select id="monthFormat">
+                            <option value="">Select format</option>
+                            <option value="m">m - Month with leading zeros (01-12)</option>
+                            <option value="n">n - Month without leading zeros (1-12)</option>
+                            <option value="M">M - Month abbreviation (Jan-Dec)</option>
+                            <option value="F">F - Full month name (January-December)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="format-group">
+                        <span class="label">Year Format</span>
+                        <select id="yearFormat">
+                            <option value="">Select format</option>
+                            <option value="Y">Y - Full year (2025)</option>
+                            <option value="y">y - Two-digit year (25)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="format-section">
+                    <div class="format-group">
+                        <span class="label">Time Format</span>
+                        <select id="timeFormat">
+                            <option value="">Select format</option>
+                            <option value="g:i a">g:i a - 12-hour format (1:30 pm)</option>
+                            <option value="h:i a">h:i a - 12-hour with leading zeros (01:30 pm)</option>
+                            <option value="G:i">G:i - 24-hour format (13:30)</option>
+                            <option value="H:i:s">H:i:s - 24-hour with seconds (13:30:45)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="format-group">
+                        <span class="label">Separator</span>
+                        <select id="separator">
+                            <option value="-">Hyphen (-)</option>
+                            <option value="/">Slash (/)</option>
+                            <option value=".">Dot (.)</option>
+                            <option value=" ">Space ( )</option>
                         </select>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="row animated fadeInUpBig">
-        <div class="col-md-8 col-md-offset-2 text-center padding-pre">
-            <h3>Generated PHP Code</h3>
-            <pre><code id="phpOutput"></code></pre>
-        </div>
-    </div>
-</div>
-
-<footer class="part4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h2>Connect with us</h2>
-                <div class="social">
-                    <a href="https://www.facebook.com/iSuperCoder" class="icons fb"></a>
-                    <a href="https://www.twitter.com/fahdmurtaza" class="icons twitter"></a>
-                    <a href="mailto:info@fahdmurtaza.com" class="icons mail"></a>
-                    <a href="https://www.linkedin.com/in/fahdmurtaza/" class="icons linkedin"></a>
+            
+            <div class="country-select">
+                <div class="section-title">Standard Formats By Country</div>
+                <input type="text" class="search-box" id="countrySearch" placeholder="Search by country name...">
+                
+                <div class="country-formats" id="countryFormats">
+                    <!-- Country formats will be added here by JavaScript -->
                 </div>
-                <p>&copy; 2024 DateCoder. All rights reserved.</p>
+            </div>
+        </div>
+        
+        <div class="format-builder" id="formatBuilder">
+            <!-- Format items will be inserted here -->
+        </div>
+        
+        <div class="button-group">
+            <button id="clearBtn" class="btn btn-danger">Clear Format</button>
+            <div id="confirmClear" class="confirm-clear">
+                <span>Are you sure?</span>
+                <button id="confirmClearBtn" class="btn btn-danger">Confirm</button>
+                <button id="cancelClearBtn" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+        
+        <div class="result" id="formatResult">
+            date(' n d');
+        </div>
+        
+        <div class="output-section">
+            <div class="output-title">Output Preview</div>
+            <div class="code-block" id="outputPreview">Your preview will appear here.</div>
+            
+            <div class="output-title">How to use in PHP</div>
+            <div class="code-block">
+                $formattedDate = date("<span id="phpExample"></span>", time());<br>
+                echo $formattedDate;
             </div>
         </div>
     </div>
-</footer>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/jquery.nav.js"></script>
-<script src="js/jquery.scrollTo.js"></script>
-<script src="js/respond.js"></script>
-<script src="js/datecoder.js"></script>
+    <script>
+        // Main variables
+        let formatParts = [];
+        
+        // Country formats data
+        const countryFormats = [
+            { country: "International Standard (ISO 8601)", format: "Y-m-d", description: "YYYY-MM-DD (2025-03-01)" },
+            { country: "United States", format: "m/d/Y", description: "MM/DD/YYYY (03/01/2025)" },
+            { country: "United Kingdom", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Germany", format: "d.m.Y", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "France", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Japan", format: "Y年m月d日", description: "YYYY年MM月DD日 (2025年03月01日)" },
+            { country: "China", format: "Y-m-d", description: "YYYY-MM-DD (2025-03-01)" },
+            { country: "Brazil", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "India", format: "d-m-Y", description: "DD-MM-YYYY (01-03-2025)" },
+            { country: "Russia", format: "d.m.Y", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "Canada", format: "Y-m-d", description: "YYYY-MM-DD (2025-03-01)" },
+            { country: "Australia", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "South Korea", format: "Y-m-d", description: "YYYY-MM-DD (2025-03-01)" },
+            { country: "Italy", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Spain", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Mexico", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Sweden", format: "Y-m-d", description: "YYYY-MM-DD (2025-03-01)" },
+            { country: "Netherlands", format: "d-m-Y", description: "DD-MM-YYYY (01-03-2025)" },
+            { country: "Switzerland", format: "d.m.Y", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "Poland", format: "d.m.Y", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "Belgium", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Long Date Format (US)", format: "F j, Y", description: "Month DD, YYYY (March 1, 2025)" },
+            { country: "Long Date Format (UK/Europe)", format: "j F Y", description: "DD Month YYYY (1 March 2025)" },
+            { country: "Czech Republic", format: "j. n. Y", description: "D. M. YYYY (1. 3. 2025)" },
+            { country: "Denmark", format: "d-m-Y", description: "DD-MM-YYYY (01-03-2025)" },
+            { country: "Finland", format: "j.n.Y", description: "D.M.YYYY (1.3.2025)" },
+            { country: "Hungary", format: "Y. m. d.", description: "YYYY. MM. DD. (2025. 03. 01.)" },
+            { country: "Norway", format: "d.m.Y", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "Portugal", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Turkey", format: "d.m.Y", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "Argentina", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Chile", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Colombia", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Indonesia", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Malaysia", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Philippines", format: "m/d/Y", description: "MM/DD/YYYY (03/01/2025)" },
+            { country: "Singapore", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Thailand", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Vietnam", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Israel", format: "d.m.Y", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "South Africa", format: "Y/m/d", description: "YYYY/MM/DD (2025/03/01)" },
+            { country: "Ukraine", format: "d.m.Y", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "Greek Format", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Arabic Format", format: "d/m/Y", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Persian Format", format: "Y/m/d", description: "YYYY/MM/DD (2025/03/01)" },
+            { country: "ISO 8601 with Time", format: "Y-m-d\\TH:i:sP", description: "YYYY-MM-DDTHH:MM:SS+TZ (2025-03-01T13:45:30+00:00)" },
+            { country: "RFC 2822", format: "D, d M Y H:i:s O", description: "Day, DD Mon YYYY HH:MM:SS +ZZZZ (Sat, 01 Mar 2025 13:45:30 +0000)" },
+            { country: "UNIX Timestamp", format: "U", description: "Seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)" }
+        ];
 
-</body>
-</html>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all the functionality
+            initApp();
+        });
+
+        function initApp() {
+            // Initialize dropdown change handlers
+            document.getElementById('dayFormat').addEventListener('change', updateFormat);
+            document.getElementById('monthFormat').addEventListener('change', updateFormat);
+            document.getElementById('yearFormat').addEventListener('change', updateFormat);
+            document.getElementById('timeFormat').addEventListener('change', updateFormat);
+            document.getElementById('separator').addEventListener('change', updateFormat);
+            
+            // Initialize country search
+            document.getElementById('countrySearch').addEventListener('keyup', filterCountries);
+            
+            // Initialize clear button
+            document.getElementById('clearBtn').addEventListener('click', function() {
+                if (formatParts.length === 0 && document.getElementById('formatResult').textContent === "date(' n d');") return;
+                
+                this.style.display = 'none';
+                document.getElementById('confirmClear').style.display = 'flex';
+            });
+            
+            document.getElementById('confirmClearBtn').addEventListener('click', function() {
+                formatParts = [];
+                document.getElementById('dayFormat').selectedIndex = 0;
+                document.getElementById('monthFormat').selectedIndex = 0;
+                document.getElementById('yearFormat').selectedIndex = 0;
+                document.getElementById('timeFormat').selectedIndex = 0;
+                
+                document.getElementById('formatResult').textContent = "date(' n d');";
+                document.getElementById('phpExample').textContent = "";
+                document.getElementById('outputPreview').textContent = 'Your preview will appear here.';
+                
+                renderFormatItems();
+                
+                document.getElementById('clearBtn').style.display = 'block';
+                document.getElementById('confirmClear').style.display = 'none';
+            });
+            
+            document.getElementById('cancelClearBtn').addEventListener('click', function() {
+                document.getElementById('clearBtn').style.display = 'block';
+                document.getElementById('confirmClear').style.display = 'none';
+            });
+            
+            // Initialize country formats
+            initCountryFormats();
+        }
+        
+        // Initialize country formats
+        function initCountryFormats() {
+            const formatsContainer = document.getElementById('countryFormats');
+            formatsContainer.innerHTML = ''; // Clear any existing content
+            
+            countryFormats.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'country-format';
+                div.innerHTML = `<strong>${item.country}</strong>: ${item.description}`;
+                div.addEventListener('click', () => {
+                    applyCountryFormat(item.format);
+                });
+                formatsContainer.appendChild(div);
+            });
+        }
+        
+        // Filter countries based on search
+        function filterCountries() {
+            const searchText = document.getElementById('countrySearch').value.toLowerCase();
+            const items = document.querySelectorAll('.country-format');
+            
+            items.forEach(item => {
+                const country = item.textContent.toLowerCase();
+                if (country.includes(searchText)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+        // Apply country format
+        function applyCountryFormat(format) {
+            // Clear existing format
+            formatParts = [];
+            document.getElementById('dayFormat').selectedIndex = 0;
+            document.getElementById('monthFormat').selectedIndex = 0;
+            document.getElementById('yearFormat').selectedIndex = 0;
+            document.getElementById('timeFormat').selectedIndex = 0;
+            
+            // Set direct format
+            document.getElementById('formatResult').textContent = `date('${format}');`;
+            document.getElementById('phpExample').textContent = format;
+            updatePreview(format);
+        }
+        
+        function updateFormat() {
+            const dayFormat = document.getElementById('dayFormat').value;
+            const monthFormat = document.getElementById('monthFormat').value;
+            const yearFormat = document.getElementById('yearFormat').value;
+            const timeFormat = document.getElementById('timeFormat').value;
+            
+            // Add new elements if they're not empty
+            if (dayFormat && !formatParts.includes('day')) {
+                addFormatItem('day', dayFormat, 'Day');
+            }
+            if (monthFormat && !formatParts.includes('month')) {
+                addFormatItem('month', monthFormat, 'Month');
+            }
+            if (yearFormat && !formatParts.includes('year')) {
+                addFormatItem('year', yearFormat, 'Year');
+            }
+            if (timeFormat && !formatParts.includes('time')) {
+                addFormatItem('time', timeFormat, 'Time');
+            }
+            
+            // Update display
+            updateFormatDisplay();
+        }
+        
+        function addFormatItem(type, value, label) {
+            formatParts.push(type);
+            renderFormatItems();
+        }
+        
+        function renderFormatItems() {
+            const builderEl = document.getElementById('formatBuilder');
+            builderEl.innerHTML = '';
+            
+            formatParts.forEach((type, index) => {
+                const item = document.createElement('div');
+                item.className = 'format-item';
+                item.draggable = true;
+                item.dataset.type = type;
+                
+                // Add drag event listeners
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragover', handleDragOver);
+                item.addEventListener('drop', handleDrop);
+                item.addEventListener('dragend', handleDragEnd);
+                
+                let value, label;
+                switch (type) {
+                    case 'day':
+                        value = document.getElementById('dayFormat').value;
+                        label = 'Day';
+                        break;
+                    case 'month':
+                        value = document.getElementById('monthFormat').value;
+                        label = 'Month';
+                        break;
+                    case 'year':
+                        value = document.getElementById('yearFormat').value;
+                        label = 'Year';
+                        break;
+                    case 'time':
+                        value = document.getElementById('timeFormat').value;
+                        label = 'Time';
+                        break;
+                }
+                
+                item.innerHTML = `${label} <span class="remove" onclick="removeItem('${type}')">×</span>`;
+                builderEl.appendChild(item);
+            });
+            
+            updateFormatDisplay();
+        }
+        
+        function removeItem(type) {
+            const index = formatParts.indexOf(type);
+            if (index !== -1) {
+                formatParts.splice(index, 1);
+                
+                // Reset the corresponding dropdown
+                switch (type) {
+                    case 'day':
+                        document.getElementById('dayFormat').selectedIndex = 0;
+                        break;
+                    case 'month':
+                        document.getElementById('monthFormat').selectedIndex = 0;
+                        break;
+                    case 'year':
+                        document.getElementById('yearFormat').selectedIndex = 0;
+                        break;
+                    case 'time':
+                        document.getElementById('timeFormat').selectedIndex = 0;
+                        break;
+                }
+                
+                renderFormatItems();
+            }
+        }
+        
+        // Drag and drop functionality
+        let dragSrcEl = null;
+        
+        function handleDragStart(e) {
+            this.style.opacity = '0.6';
+            dragSrcEl = this;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', this.dataset.type);
+        }
+        
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+        
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            
+            if (dragSrcEl !== this) {
+                const fromType = dragSrcEl.dataset.type;
+                const toType = this.dataset.type;
+                
+                const fromIndex = formatParts.indexOf(fromType);
+                const toIndex = formatParts.indexOf(toType);
+                
+                // Swap positions in the array
+                [formatParts[fromIndex], formatParts[toIndex]] = [formatParts[toIndex], formatParts[fromIndex]];
+                
+                renderFormatItems();
+            }
+            
+            return false;
+        }
+        
+        function handleDragEnd() {
+            this.style.opacity = '1';
+        }
+        
+        function updateFormatDisplay() {
+            let formatString = '';
+            const separator = document.getElementById('separator').value;
+            
+            formatParts.forEach((type, index) => {
+                let value;
+                switch (type) {
+                    case 'day':
+                        value = document.getElementById('dayFormat').value;
+                        break;
+                    case 'month':
+                        value = document.getElementById('monthFormat').value;
+                        break;
+                    case 'year':
+                        value = document.getElementById('yearFormat').value;
+                        break;
+                    case 'time':
+                        value = document.getElementById('timeFormat').value;
+                        break;
+                }
+                
+                formatString += value;
+                
+                // Add separator if not the last item and not before time format
+                if (index < formatParts.length - 1) {
+                    const nextType = formatParts[index + 1];
+                    if (nextType === 'time' || type === 'time') {
+                        formatString += ' ';
+                    } else {
+                        formatString += separator;
+                    }
+                }
+            });
+            
+            if (formatString) {
+                document.getElementById('formatResult').textContent = `date('${formatString}');`;
+                document.getElementById('phpExample').textContent = formatString;
+                updatePreview(formatString);
+            } else {
+                document.getElementById('formatResult').textContent = "date(' n d');";
+                document.getElementById('phpExample').textContent = "";
+                document.getElementById('outputPreview').textContent = 'Your preview will appear here.';
+            }
+        }
+        
+        function updatePreview(formatString) {
+            if (formatString) {
+                const now = new Date();
+                let preview = formatString;
+                
+                // Basic simulation of PHP date formatting (simplified)
+                preview = preview.replace(/d/g, String(now.getDate()).padStart(2, '0'));
+                preview = preview.replace(/j/g, now.getDate());
+                preview = preview.replace(/D/g, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][now.getDay()]);
+                preview = preview.replace(/l/g, ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][now.getDay()]);
+                preview = preview.replace(/S/g, getDaySuffix(now.getDate()));
+                preview = preview.replace(/m/g, String(now.getMonth() + 1).padStart(2, '0'));
+                preview = preview.replace(/n/g, now.getMonth() + 1);
+                preview = preview.replace(/M/g, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][now.getMonth()]);
+                preview = preview.replace(/F/g, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][now.getMonth()]);
+                preview = preview.replace(/Y/g, now.getFullYear());
+                preview = preview.replace(/y/g, String(now.getFullYear()).slice(-2));
