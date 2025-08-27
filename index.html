@@ -287,7 +287,7 @@
         </div>
         
         <div class="tab-content active" id="custom-tab">
-            <p>Select options from the dropdowns to build your PHP date format string.</p>
+            <p id="customTabDescription">Select options from the dropdowns to build your date format string.</p>
             
             <div class="form-row">
                 <div class="form-group">
@@ -371,7 +371,7 @@
         </div>
         
         <div class="result">
-            <h3>Your PHP Date Format:</h3>
+            <h3 id="formatResultTitle">Your PHP Date Format:</h3>
             <div id="formatString" class="code"></div>
         </div>
         
@@ -799,68 +799,73 @@
                     preview = preview.replace(/日/g, '日');
                 } else if (currentLanguage === 'python') {
                     // Python date formatting
-                    preview = preview.replace(/%d/g, String(now.getDate()).padStart(2, '0'));
-                    preview = preview.replace(/%j/g, Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24));
-                    preview = preview.replace(/%a/g, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][now.getDay()]);
-                    preview = preview.replace(/%A/g, ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][now.getDay()]);
-                    preview = preview.replace(/%m/g, String(now.getMonth() + 1).padStart(2, '0'));
-                    preview = preview.replace(/%b/g, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][now.getMonth()]);
-                    preview = preview.replace(/%B/g, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][now.getMonth()]);
-                    preview = preview.replace(/%Y/g, now.getFullYear());
-                    preview = preview.replace(/%y/g, String(now.getFullYear()).slice(-2));
+                    const replacements = {
+                        '%-d': now.getDate(), // No zero padding
+                        '%d': String(now.getDate()).padStart(2, '0'), // Zero padded
+                        '%j': Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24),
+                        '%A': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][now.getDay()],
+                        '%a': ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][now.getDay()],
+                        '%-m': now.getMonth() + 1, // No zero padding
+                        '%m': String(now.getMonth() + 1).padStart(2, '0'), // Zero padded
+                        '%B': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][now.getMonth()],
+                        '%b': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][now.getMonth()],
+                        '%Y': now.getFullYear(),
+                        '%y': String(now.getFullYear()).slice(-2),
+                        '%I': String((now.getHours() % 12) || 12).padStart(2, '0'),
+                        '%H': String(now.getHours()).padStart(2, '0'),
+                        '%M': String(now.getMinutes()).padStart(2, '0'),
+                        '%S': String(now.getSeconds()).padStart(2, '0'),
+                        '%p': now.getHours() < 12 ? 'AM' : 'PM',
+                        '%z': '+0000', // Simplified timezone
+                        '%s': Math.floor(now.getTime() / 1000),
+                        '年': '年',
+                        '月': '月',
+                        '日': '日'
+                    };
                     
-                    let hours24 = now.getHours();
-                    let hours12 = hours24 % 12 || 12;
-                    let minutes = String(now.getMinutes()).padStart(2, '0');
-                    let seconds = String(now.getSeconds()).padStart(2, '0');
-                    let ampm = hours24 < 12 ? 'am' : 'pm';
-                    let AMPM = hours24 < 12 ? 'AM' : 'PM';
+                    // Sort replacements by length (longest first) to avoid conflicts
+                    const sortedKeys = Object.keys(replacements).sort((a, b) => b.length - a.length);
                     
-                    // Handle time formats
-                    preview = preview.replace(/%I/g, String(hours12).padStart(2, '0'));
-                    preview = preview.replace(/%H/g, String(hours24).padStart(2, '0'));
-                    preview = preview.replace(/%M/g, minutes);
-                    preview = preview.replace(/%S/g, seconds);
-                    preview = preview.replace(/%p/g, AMPM);
-                    preview = preview.replace(/%z/g, '+0000'); // Simplified timezone
-                    preview = preview.replace(/%s/g, Math.floor(now.getTime() / 1000));
-                    
-                    // Handle 年月日 for Japanese/Chinese formats
-                    preview = preview.replace(/年/g, '年');
-                    preview = preview.replace(/月/g, '月');
-                    preview = preview.replace(/日/g, '日');
+                    for (const key of sortedKeys) {
+                        const regex = new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+                        preview = preview.replace(regex, replacements[key]);
+                    }
                 } else if (currentLanguage === 'javascript') {
-                    // JavaScript date formatting (using Intl.DateTimeFormat patterns)
-                    preview = preview.replace(/YYYY/g, now.getFullYear());
-                    preview = preview.replace(/YY/g, String(now.getFullYear()).slice(-2));
-                    preview = preview.replace(/MM/g, String(now.getMonth() + 1).padStart(2, '0'));
-                    preview = preview.replace(/M/g, now.getMonth() + 1);
-                    preview = preview.replace(/DD/g, String(now.getDate()).padStart(2, '0'));
-                    preview = preview.replace(/D/g, now.getDate());
-                    preview = preview.replace(/MMMM/g, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][now.getMonth()]);
-                    preview = preview.replace(/MMM/g, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][now.getMonth()]);
-                    preview = preview.replace(/dddd/g, ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][now.getDay()]);
-                    preview = preview.replace(/ddd/g, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][now.getDay()]);
+                    // JavaScript date formatting (moment.js style patterns)
+                    // Use placeholders to avoid conflicts between similar patterns
+                    const replacements = {
+                        'YYYY': now.getFullYear(),
+                        'YY': String(now.getFullYear()).slice(-2),
+                        'MMMM': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][now.getMonth()],
+                        'MMM': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][now.getMonth()],
+                        'MM': String(now.getMonth() + 1).padStart(2, '0'),
+                        'M': now.getMonth() + 1,
+                        'dddd': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][now.getDay()],
+                        'ddd': ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][now.getDay()],
+                        'DD': String(now.getDate()).padStart(2, '0'),
+                        'D': now.getDate(),
+                        'HH': String(now.getHours()).padStart(2, '0'),
+                        'H': now.getHours(),
+                        'hh': String((now.getHours() % 12) || 12).padStart(2, '0'),
+                        'h': (now.getHours() % 12) || 12,
+                        'mm': String(now.getMinutes()).padStart(2, '0'),
+                        'ss': String(now.getSeconds()).padStart(2, '0'),
+                        'A': now.getHours() < 12 ? 'AM' : 'PM',
+                        'a': now.getHours() < 12 ? 'am' : 'pm',
+                        'Z': '+00:00', // Simplified timezone
+                        'X': Math.floor(now.getTime() / 1000),
+                        '年': '年',
+                        '月': '月',
+                        '日': '日'
+                    };
                     
-                    let hours24 = now.getHours();
-                    let hours12 = hours24 % 12 || 12;
-                    let minutes = String(now.getMinutes()).padStart(2, '0');
-                    let seconds = String(now.getSeconds()).padStart(2, '0');
+                    // Sort replacements by length (longest first) to avoid conflicts
+                    const sortedKeys = Object.keys(replacements).sort((a, b) => b.length - a.length);
                     
-                    // Handle time formats
-                    preview = preview.replace(/HH/g, String(hours24).padStart(2, '0'));
-                    preview = preview.replace(/H/g, hours24);
-                    preview = preview.replace(/hh/g, String(hours12).padStart(2, '0'));
-                    preview = preview.replace(/h/g, hours12);
-                    preview = preview.replace(/mm/g, minutes);
-                    preview = preview.replace(/ss/g, seconds);
-                    preview = preview.replace(/Z/g, '+00:00'); // Simplified timezone
-                    preview = preview.replace(/X/g, Math.floor(now.getTime() / 1000));
-                    
-                    // Handle 年月日 for Japanese/Chinese formats
-                    preview = preview.replace(/年/g, '年');
-                    preview = preview.replace(/月/g, '月');
-                    preview = preview.replace(/日/g, '日');
+                    for (const key of sortedKeys) {
+                        const regex = new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+                        preview = preview.replace(regex, replacements[key]);
+                    }
                 }
                 
                 document.getElementById('outputPreview').textContent = preview;
@@ -880,6 +885,137 @@
         }
         
         // Language switching
+        // Language-specific dropdown options
+        const languageDropdownOptions = {
+            php: {
+                day: [
+                    { value: '', text: '-- Day Format --' },
+                    { value: 'd', text: 'd - With zeros (01-31)' },
+                    { value: 'j', text: 'j - No zeros (1-31)' },
+                    { value: 'D', text: 'D - Short name (Mon-Sun)' },
+                    { value: 'l', text: 'l - Full name (Monday-Sunday)' },
+                    { value: 'S', text: 'S - Ordinal suffix (st,nd,rd,th)' }
+                ],
+                month: [
+                    { value: '', text: '-- Month Format --' },
+                    { value: 'm', text: 'm - With zeros (01-12)' },
+                    { value: 'n', text: 'n - No zeros (1-12)' },
+                    { value: 'M', text: 'M - Short name (Jan-Dec)' },
+                    { value: 'F', text: 'F - Full name (January-December)' }
+                ],
+                year: [
+                    { value: '', text: '-- Year Format --' },
+                    { value: 'Y', text: 'Y - 4 digits (2025)' },
+                    { value: 'y', text: 'y - 2 digits (25)' }
+                ],
+                time: [
+                    { value: '', text: '-- Time Format --' },
+                    { value: 'g:i a', text: 'g:i a - 12hr (1:30 pm)' },
+                    { value: 'h:i a', text: 'h:i a - 12hr (01:30 pm)' },
+                    { value: 'G:i', text: 'G:i - 24hr (13:30)' },
+                    { value: 'H:i:s', text: 'H:i:s - 24hr with seconds (13:30:45)' }
+                ]
+            },
+            python: {
+                day: [
+                    { value: '', text: '-- Day Format --' },
+                    { value: '%d', text: '%d - With zeros (01-31)' },
+                    { value: '%-d', text: '%-d - No zeros (1-31)' },
+                    { value: '%a', text: '%a - Short name (Mon-Sun)' },
+                    { value: '%A', text: '%A - Full name (Monday-Sunday)' }
+                ],
+                month: [
+                    { value: '', text: '-- Month Format --' },
+                    { value: '%m', text: '%m - With zeros (01-12)' },
+                    { value: '%-m', text: '%-m - No zeros (1-12)' },
+                    { value: '%b', text: '%b - Short name (Jan-Dec)' },
+                    { value: '%B', text: '%B - Full name (January-December)' }
+                ],
+                year: [
+                    { value: '', text: '-- Year Format --' },
+                    { value: '%Y', text: '%Y - 4 digits (2025)' },
+                    { value: '%y', text: '%y - 2 digits (25)' }
+                ],
+                time: [
+                    { value: '', text: '-- Time Format --' },
+                    { value: '%I:%M %p', text: '%I:%M %p - 12hr (01:30 PM)' },
+                    { value: '%H:%M', text: '%H:%M - 24hr (13:30)' },
+                    { value: '%H:%M:%S', text: '%H:%M:%S - 24hr with seconds (13:30:45)' }
+                ]
+            },
+            javascript: {
+                day: [
+                    { value: '', text: '-- Day Format --' },
+                    { value: 'DD', text: 'DD - With zeros (01-31)' },
+                    { value: 'D', text: 'D - No zeros (1-31)' },
+                    { value: 'ddd', text: 'ddd - Short name (Mon-Sun)' },
+                    { value: 'dddd', text: 'dddd - Full name (Monday-Sunday)' }
+                ],
+                month: [
+                    { value: '', text: '-- Month Format --' },
+                    { value: 'MM', text: 'MM - With zeros (01-12)' },
+                    { value: 'M', text: 'M - No zeros (1-12)' },
+                    { value: 'MMM', text: 'MMM - Short name (Jan-Dec)' },
+                    { value: 'MMMM', text: 'MMMM - Full name (January-December)' }
+                ],
+                year: [
+                    { value: '', text: '-- Year Format --' },
+                    { value: 'YYYY', text: 'YYYY - 4 digits (2025)' },
+                    { value: 'YY', text: 'YY - 2 digits (25)' }
+                ],
+                time: [
+                    { value: '', text: '-- Time Format --' },
+                    { value: 'h:mm A', text: 'h:mm A - 12hr (1:30 PM)' },
+                    { value: 'HH:mm', text: 'HH:mm - 24hr (13:30)' },
+                    { value: 'HH:mm:ss', text: 'HH:mm:ss - 24hr with seconds (13:30:45)' }
+                ]
+            }
+        };
+        
+        function updateDropdowns() {
+            const options = languageDropdownOptions[currentLanguage];
+            
+            // Update day format dropdown
+            const daySelect = document.getElementById('dayFormat');
+            daySelect.innerHTML = '';
+            options.day.forEach(opt => {
+                const option = document.createElement('option');
+                option.value = opt.value;
+                option.textContent = opt.text;
+                daySelect.appendChild(option);
+            });
+            
+            // Update month format dropdown
+            const monthSelect = document.getElementById('monthFormat');
+            monthSelect.innerHTML = '';
+            options.month.forEach(opt => {
+                const option = document.createElement('option');
+                option.value = opt.value;
+                option.textContent = opt.text;
+                monthSelect.appendChild(option);
+            });
+            
+            // Update year format dropdown
+            const yearSelect = document.getElementById('yearFormat');
+            yearSelect.innerHTML = '';
+            options.year.forEach(opt => {
+                const option = document.createElement('option');
+                option.value = opt.value;
+                option.textContent = opt.text;
+                yearSelect.appendChild(option);
+            });
+            
+            // Update time format dropdown
+            const timeSelect = document.getElementById('timeFormat');
+            timeSelect.innerHTML = '';
+            options.time.forEach(opt => {
+                const option = document.createElement('option');
+                option.value = opt.value;
+                option.textContent = opt.text;
+                timeSelect.appendChild(option);
+            });
+        }
+        
         function switchLanguage() {
             const languageSelect = document.getElementById('languageSelect');
             const mainTitle = document.getElementById('mainTitle');
@@ -890,8 +1026,23 @@
             
             currentLanguage = languageSelect.value;
             
+            // Update dropdown options for the selected language
+            updateDropdowns();
+            
+            // Clear current format parts and reset dropdowns
+            formatParts = [];
+            document.getElementById('formatBuilder').innerHTML = '';
+            document.getElementById('formatString').textContent = '';
+            document.getElementById('outputPreview').textContent = 'Your preview will appear here.';
+            
+            // Update custom tab description and result title
+            const customTabDescription = document.getElementById('customTabDescription');
+            const formatResultTitle = document.getElementById('formatResultTitle');
+            
             if (currentLanguage === 'php') {
                 mainTitle.textContent = 'PHP Date Format Builder';
+                customTabDescription.textContent = 'Select options from the dropdowns to build your PHP date format string.';
+                formatResultTitle.textContent = 'Your PHP Date Format:';
                 explanationTitle.textContent = 'How to use in PHP:';
                 explanationText.textContent = 'Copy the format string above and use it in your PHP code like this:';
                 codeExample.innerHTML = `
@@ -900,6 +1051,8 @@
                 `;
             } else if (currentLanguage === 'python') {
                 mainTitle.textContent = 'Python Date Format Builder';
+                customTabDescription.textContent = 'Select options from the dropdowns to build your Python strftime format string.';
+                formatResultTitle.textContent = 'Your Python Date Format:';
                 explanationTitle.textContent = 'How to use in Python:';
                 explanationText.textContent = 'Copy the format string above and use it in your Python code like this:';
                 codeExample.innerHTML = `
@@ -909,21 +1062,26 @@
                 `;
             } else if (currentLanguage === 'javascript') {
                 mainTitle.textContent = 'JavaScript Date Format Builder';
+                customTabDescription.textContent = 'Select options from the dropdowns to build your JavaScript date format string (compatible with moment.js/day.js).';
+                formatResultTitle.textContent = 'Your JavaScript Date Format:';
                 explanationTitle.textContent = 'How to use in JavaScript:';
-                explanationText.textContent = 'Copy the format string above and use it in your JavaScript code like this:';
+                explanationText.textContent = 'Note: This shows a custom format string. For native JavaScript, use Intl.DateTimeFormat or a library like moment.js/day.js:';
                 codeExample.innerHTML = `
-                    const date = new Date();<br>
-                    const formattedDate = date.toLocaleDateString('en-US', {<br>
-                    &nbsp;&nbsp;year: 'numeric', month: '2-digit', day: '2-digit'<br>
-                    });<br>
+                    // Custom format string: "<span id="phpExample"></span>"<br>
+                    // Use with libraries like moment.js:<br>
+                    const formattedDate = moment().format("<span id="phpExampleJS"></span>");<br>
                     console.log(formattedDate);
                 `;
             }
             
             // Update the example with current format
             const currentFormat = document.getElementById('formatString').textContent;
-            if (currentFormat) {
+            if (currentFormat && phpExample) {
                 phpExample.textContent = currentFormat;
+                const phpExampleJS = document.getElementById('phpExampleJS');
+                if (phpExampleJS) {
+                    phpExampleJS.textContent = currentFormat;
+                }
             }
             
             // Refresh country formats display to show the new language
@@ -993,6 +1151,7 @@
         // Initialize
         window.onload = function() {
             switchTab('custom-tab-btn');
+            updateDropdowns(); // Initialize dropdowns for default language
             initCountryFormats(); // Initialize country formats
         };
     </script>
