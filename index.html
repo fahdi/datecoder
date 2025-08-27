@@ -131,22 +131,38 @@
         }
         .tabs {
             display: flex;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
         }
         .tab {
-            padding: 10px 15px;
+            padding: 12px 24px;
             cursor: pointer;
             background-color: #f5f5f5;
             border: 1px solid #ddd;
             border-bottom: none;
-            border-radius: 4px 4px 0 0;
+            border-radius: 6px 6px 0 0;
             margin-right: 5px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .tab:hover {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
         }
         .tab.active {
-            background-color: #fff;
-            border-bottom: 1px solid #fff;
-            margin-bottom: -1px;
+            background-color: #4a90e2;
+            color: white;
+            border-color: #4a90e2;
+            transform: translateY(-2px);
+        }
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #4a90e2;
         }
         .tab-content {
             display: none;
@@ -156,14 +172,19 @@
         }
         .country-format {
             cursor: pointer;
-            padding: 8px;
+            padding: 12px;
             border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 5px;
+            border-radius: 6px;
+            margin-bottom: 8px;
             background-color: #f9f9f9;
+            transition: all 0.2s ease;
+            border-left: 4px solid #4a90e2;
         }
         .country-format:hover {
-            background-color: #f0f8ff;
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+            transform: translateX(2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         .search-box {
             width: 100%;
@@ -173,9 +194,29 @@
             border-radius: 4px;
         }
         .country-formats {
-            max-height: 300px;
+            max-height: 400px;
             overflow-y: auto;
             margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fafafa;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        /* Scrollbar styling */
+        .country-formats::-webkit-scrollbar {
+            width: 8px;
+        }
+        .country-formats::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .country-formats::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        .country-formats::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
         }
     </style>
 </head>
@@ -249,7 +290,10 @@
         
         <div class="tab-content" id="countries-tab">
             <p>Select a common date format used by a specific country:</p>
-            <input type="text" class="search-box" id="countrySearch" placeholder="Search by country name..." onkeyup="filterCountries()">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <input type="text" class="search-box" id="countrySearch" placeholder="Search by country name... (Type to filter)" onkeyup="filterCountries()" style="flex: 1; margin-right: 10px;">
+                <span id="formatCount" style="color: #666; font-size: 0.9em; white-space: nowrap;"></span>
+            </div>
             
             <div class="country-formats" id="countryFormats">
                 <!-- Country formats will be added here by JavaScript -->
@@ -350,10 +394,23 @@
             const formatsContainer = document.getElementById('countryFormats');
             formatsContainer.innerHTML = ''; // Clear any existing content
             
+            // Update format count
+            document.getElementById('formatCount').textContent = `${countryFormats.length} formats available`;
+            
             countryFormats.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'country-format';
-                div.innerHTML = `<strong>${item.country}</strong>: ${item.description}`;
+                div.innerHTML = `
+                    <div style="margin-bottom: 5px;">
+                        <strong style="color: #2c3e50;">${item.country}</strong>
+                    </div>
+                    <div style="color: #555; font-size: 0.9em; margin-bottom: 5px;">
+                        ${item.description}
+                    </div>
+                    <div style="color: #4a90e2; font-family: monospace; font-weight: bold;">
+                        ${item.format}
+                    </div>
+                `;
                 div.addEventListener('click', () => {
                     applyCountryFormat(item.format);
                 });
@@ -365,15 +422,39 @@
         function filterCountries() {
             const searchText = document.getElementById('countrySearch').value.toLowerCase();
             const items = document.querySelectorAll('.country-format');
+            let visibleCount = 0;
             
             items.forEach(item => {
                 const country = item.textContent.toLowerCase();
                 if (country.includes(searchText)) {
                     item.style.display = 'block';
+                    visibleCount++;
                 } else {
                     item.style.display = 'none';
                 }
             });
+            
+            // Update format count
+            document.getElementById('formatCount').textContent = searchText.length > 0 ? 
+                `${visibleCount} of ${countryFormats.length} formats` : 
+                `${countryFormats.length} formats available`;
+            
+            // Show/hide no results message
+            const noResults = document.getElementById('noResults');
+            if (visibleCount === 0 && searchText.length > 0) {
+                if (!noResults) {
+                    const noResultsDiv = document.createElement('div');
+                    noResultsDiv.id = 'noResults';
+                    noResultsDiv.style.textAlign = 'center';
+                    noResultsDiv.style.padding = '20px';
+                    noResultsDiv.style.color = '#666';
+                    noResultsDiv.style.fontStyle = 'italic';
+                    noResultsDiv.textContent = 'No countries found matching your search.';
+                    document.getElementById('countryFormats').appendChild(noResultsDiv);
+                }
+            } else if (noResults) {
+                noResults.remove();
+            }
         }
         
         // Apply country format
@@ -385,13 +466,29 @@
             document.getElementById('yearFormat').selectedIndex = 0;
             document.getElementById('timeFormat').selectedIndex = 0;
             
+            // Clear format builder
+            document.getElementById('formatBuilder').innerHTML = '';
+            
             // Set direct format
             document.getElementById('formatString').textContent = format;
             document.getElementById('phpExample').textContent = format;
             updatePreview(format);
             
-            // Switch to custom tab
+            // Switch to custom tab and show success message
             switchTab('custom-tab-btn');
+            
+            // Show temporary success message
+            const successMsg = document.createElement('div');
+            successMsg.style.cssText = 'background-color: #d4edda; color: #155724; padding: 10px; border-radius: 4px; margin: 10px 0; border: 1px solid #c3e6cb;';
+            successMsg.textContent = `✓ Applied ${format} format successfully!`;
+            document.getElementById('formatBuilder').parentNode.insertBefore(successMsg, document.getElementById('formatBuilder'));
+            
+            // Remove success message after 3 seconds
+            setTimeout(() => {
+                if (successMsg.parentNode) {
+                    successMsg.remove();
+                }
+            }, 3000);
         }
         
         function updateFormat() {
@@ -689,11 +786,16 @@
         
         document.getElementById('countries-tab-btn').addEventListener('click', function() {
             switchTab('countries-tab-btn');
+            // Focus the search box for better UX
+            setTimeout(() => {
+                document.getElementById('countrySearch').focus();
+            }, 100);
         });
         
         // Initialize
         window.onload = function() {
             switchTab('custom-tab-btn');
+            initCountryFormats(); // Initialize country formats
         };
     </script>
 </body>

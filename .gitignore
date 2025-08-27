@@ -1,1 +1,6 @@
 .idea
+deploy.py
+venv
+.env
+setup_env.sh
+requirements.txt
