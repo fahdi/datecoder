@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DateCoder - PHP & Python Date Format Builder | Free Online Tool</title>
+    <title>DateCoder - PHP, Python & JavaScript Date Format Builder | Free Online Tool</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Free online tool to build PHP and Python date format strings. Convert between PHP date() and Python strftime() formats with real-time preview. Support for 50+ country formats.">
-    <meta name="keywords" content="PHP date format, Python strftime, date formatting, PHP date function, Python datetime, date format builder, online tool, free tool">
-    <meta name="author" content="DateCoder">
+    <meta name="description" content="Free online tool to build PHP, Python, and JavaScript date format strings. Convert between PHP date(), Python strftime(), and JavaScript Intl.DateTimeFormat with real-time preview. Support for 50+ country formats.">
+    <meta name="keywords" content="PHP date format, Python strftime, JavaScript date formatting, PHP date function, Python datetime, JavaScript Intl.DateTimeFormat, date format builder, online tool, free tool">
+    <meta name="author" content="Fahad Murtaza">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="DateCoder - PHP & Python Date Format Builder">
-    <meta property="og:description" content="Free online tool to build PHP and Python date format strings with real-time preview and 50+ country formats.">
+    <meta property="og:title" content="DateCoder - PHP, Python & JavaScript Date Format Builder">
+    <meta property="og:description" content="Free online tool to build PHP, Python, and JavaScript date format strings with real-time preview and 50+ country formats.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fahdmurtaza.com/datecoder/">
     <meta property="og:image" content="https://fahdmurtaza.com/datecoder/img/social.png">
@@ -21,8 +21,8 @@
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="DateCoder - PHP & Python Date Format Builder">
-    <meta name="twitter:description" content="Free online tool to build PHP and Python date format strings with real-time preview and 50+ country formats.">
+    <meta name="twitter:title" content="DateCoder - PHP, Python & JavaScript Date Format Builder">
+    <meta name="twitter:description" content="Free online tool to build PHP, Python, and JavaScript date format strings with real-time preview and 50+ country formats.">
     <meta name="twitter:image" content="https://fahdmurtaza.com/datecoder/img/social.png">
     
     <!-- Canonical URL -->
@@ -276,6 +276,7 @@
                 <select id="languageSelect" onchange="switchLanguage()" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; background-color: white;">
                     <option value="php">PHP</option>
                     <option value="python">Python</option>
+                    <option value="javascript">JavaScript</option>
                 </select>
             </div>
         </div>
@@ -394,56 +395,56 @@
         let formatParts = [];
         let currentLanguage = 'php';
         
-        // Country formats data with PHP and Python equivalents
+        // Country formats data with PHP, Python, and JavaScript equivalents
         const countryFormats = [
-            { country: "International Standard (ISO 8601)", php: "Y-m-d", python: "%Y-%m-%d", description: "YYYY-MM-DD (2025-03-01)" },
-            { country: "United States", php: "m/d/Y", python: "%m/%d/%Y", description: "MM/DD/YYYY (03/01/2025)" },
-            { country: "United Kingdom", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Germany", php: "d.m.Y", python: "%d.%m.%Y", description: "DD.MM.YYYY (01.03.2025)" },
-            { country: "France", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Japan", php: "Y年m月d日", python: "%Y年%m月%d日", description: "YYYY年MM月DD日 (2025年03月01日)" },
-            { country: "China", php: "Y-m-d", python: "%Y-%m-%d", description: "YYYY-MM-DD (2025-03-01)" },
-            { country: "Brazil", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "India", php: "d-m-Y", python: "%d-%m-%Y", description: "DD-MM-YYYY (01-03-2025)" },
-            { country: "Russia", php: "d.m.Y", python: "%d.%m.%Y", description: "DD.MM.YYYY (01.03.2025)" },
-            { country: "Canada", php: "Y-m-d", python: "%Y-%m-%d", description: "YYYY-MM-DD (2025-03-01)" },
-            { country: "Australia", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "South Korea", php: "Y-m-d", python: "%Y-%m-%d", description: "YYYY-MM-DD (2025-03-01)" },
-            { country: "Italy", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Spain", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Mexico", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Sweden", php: "Y-m-d", python: "%Y-%m-%d", description: "YYYY-MM-DD (2025-03-01)" },
-            { country: "Netherlands", php: "d-m-Y", python: "%d-%m-%Y", description: "DD-MM-YYYY (01-03-2025)" },
-            { country: "Switzerland", php: "d.m.Y", python: "%d.%m.%Y", description: "DD.MM.YYYY (01.03.2025)" },
-            { country: "Poland", php: "d.m.Y", python: "%d.%m.%Y", description: "DD.MM.YYYY (01.03.2025)" },
-            { country: "Belgium", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Long Date Format (US)", php: "F j, Y", python: "%B %d, %Y", description: "Month DD, YYYY (March 1, 2025)" },
-            { country: "Long Date Format (UK/Europe)", php: "j F Y", python: "%d %B %Y", description: "DD Month YYYY (1 March 2025)" },
-            { country: "Czech Republic", php: "j. n. Y", python: "%d. %m. %Y", description: "D. M. YYYY (1. 3. 2025)" },
-            { country: "Denmark", php: "d-m-Y", python: "%d-%m-%Y", description: "DD-MM-YYYY (01-03-2025)" },
-            { country: "Finland", php: "j.n.Y", python: "%d.%m.%Y", description: "D.M.YYYY (1.3.2025)" },
-            { country: "Hungary", php: "Y. m. d.", python: "%Y. %m. %d.", description: "YYYY. MM. DD. (2025. 03. 01.)" },
-            { country: "Norway", php: "d.m.Y", python: "%d.%m.%Y", description: "DD.MM.YYYY (01.03.2025)" },
-            { country: "Portugal", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Turkey", php: "d.m.Y", python: "%d.%m.%Y", description: "DD.MM.YYYY (01.03.2025)" },
-            { country: "Argentina", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Chile", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Colombia", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Indonesia", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Malaysia", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Philippines", php: "m/d/Y", python: "%m/%d/%Y", description: "MM/DD/YYYY (03/01/2025)" },
-            { country: "Singapore", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Thailand", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Vietnam", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Israel", php: "d.m.Y", python: "%d.%m.%Y", description: "DD.MM.YYYY (01.03.2025)" },
-            { country: "South Africa", php: "Y/m/d", python: "%Y/%m/%d", description: "YYYY/MM/DD (2025/03/01)" },
-            { country: "Ukraine", php: "d.m.Y", python: "%d.%m.%Y", description: "DD.MM.YYYY (01.03.2025)" },
-            { country: "Greek Format", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Arabic Format", php: "d/m/Y", python: "%d/%m/%Y", description: "DD/MM/YYYY (01/03/2025)" },
-            { country: "Persian Format", php: "Y/m/d", python: "%Y/%m/%d", description: "YYYY/MM/DD (2025/03/01)" },
-            { country: "ISO 8601 with Time", php: "Y-m-d\\TH:i:sP", python: "%Y-%m-%dT%H:%M:%S%z", description: "YYYY-MM-DDTHH:MM:SS+TZ (2025-03-01T13:45:30+00:00)" },
-            { country: "RFC 2822", php: "D, d M Y H:i:s O", python: "%a, %d %b %Y %H:%M:%S %z", description: "Day, DD Mon YYYY HH:MM:SS +ZZZZ (Sat, 01 Mar 2025 13:45:30 +0000)" },
-            { country: "UNIX Timestamp", php: "U", python: "%s", description: "Seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)" }
+            { country: "International Standard (ISO 8601)", php: "Y-m-d", python: "%Y-%m-%d", javascript: "YYYY-MM-DD", description: "YYYY-MM-DD (2025-03-01)" },
+            { country: "United States", php: "m/d/Y", python: "%m/%d/%Y", javascript: "MM/DD/YYYY", description: "MM/DD/YYYY (03/01/2025)" },
+            { country: "United Kingdom", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Germany", php: "d.m.Y", python: "%d.%m.%Y", javascript: "DD.MM.YYYY", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "France", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Japan", php: "Y年m月d日", python: "%Y年%m月%d日", javascript: "YYYY年MM月DD日", description: "YYYY年MM月DD日 (2025年03月01日)" },
+            { country: "China", php: "Y-m-d", python: "%Y-%m-%d", javascript: "YYYY-MM-DD", description: "YYYY-MM-DD (2025-03-01)" },
+            { country: "Brazil", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "India", php: "d-m-Y", python: "%d-%m-%Y", javascript: "DD-MM-YYYY", description: "DD-MM-YYYY (01-03-2025)" },
+            { country: "Russia", php: "d.m.Y", python: "%d.%m.%Y", javascript: "DD.MM.YYYY", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "Canada", php: "Y-m-d", python: "%Y-%m-%d", javascript: "YYYY-MM-DD", description: "YYYY-MM-DD (2025-03-01)" },
+            { country: "Australia", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "South Korea", php: "Y-m-d", python: "%Y-%m-%d", javascript: "YYYY-MM-DD", description: "YYYY-MM-DD (2025-03-01)" },
+            { country: "Italy", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Spain", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Mexico", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Sweden", php: "Y-m-d", python: "%Y-%m-%d", javascript: "YYYY-MM-DD", description: "YYYY-MM-DD (2025-03-01)" },
+            { country: "Netherlands", php: "d-m-Y", python: "%d-%m-%Y", javascript: "DD-MM-YYYY", description: "DD-MM-YYYY (01-03-2025)" },
+            { country: "Switzerland", php: "d.m.Y", python: "%d.%m.%Y", javascript: "DD.MM.YYYY", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "Poland", php: "d.m.Y", python: "%d.%m.%Y", javascript: "DD.MM.YYYY", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "Belgium", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Long Date Format (US)", php: "F j, Y", python: "%B %d, %Y", javascript: "MMMM D, YYYY", description: "Month DD, YYYY (March 1, 2025)" },
+            { country: "Long Date Format (UK/Europe)", php: "j F Y", python: "%d %B %Y", javascript: "D MMMM YYYY", description: "DD Month YYYY (1 March 2025)" },
+            { country: "Czech Republic", php: "j. n. Y", python: "%d. %m. %Y", javascript: "D. M. YYYY", description: "D. M. YYYY (1. 3. 2025)" },
+            { country: "Denmark", php: "d-m-Y", python: "%d-%m-%Y", javascript: "DD-MM-YYYY", description: "DD-MM-YYYY (01-03-2025)" },
+            { country: "Finland", php: "j.n.Y", python: "%d.%m.%Y", javascript: "D.M.YYYY", description: "D.M.YYYY (1.3.2025)" },
+            { country: "Hungary", php: "Y. m. d.", python: "%Y. %m. %d.", javascript: "YYYY. MM. DD.", description: "YYYY. MM. DD. (2025. 03. 01.)" },
+            { country: "Norway", php: "d.m.Y", python: "%d.%m.%Y", javascript: "DD.MM.YYYY", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "Portugal", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Turkey", php: "d.m.Y", python: "%d.%m.%Y", javascript: "DD.MM.YYYY", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "Argentina", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Chile", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Colombia", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Indonesia", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Malaysia", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Philippines", php: "m/d/Y", python: "%m/%d/%Y", javascript: "MM/DD/YYYY", description: "MM/DD/YYYY (03/01/2025)" },
+            { country: "Singapore", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Thailand", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Vietnam", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Israel", php: "d.m.Y", python: "%d.%m.%Y", javascript: "DD.MM.YYYY", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "South Africa", php: "Y/m/d", python: "%Y/%m/%d", javascript: "YYYY/MM/DD", description: "YYYY/MM/DD (2025/03/01)" },
+            { country: "Ukraine", php: "d.m.Y", python: "%d.%m.%Y", javascript: "DD.MM.YYYY", description: "DD.MM.YYYY (01.03.2025)" },
+            { country: "Greek Format", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Arabic Format", php: "d/m/Y", python: "%d/%m/%Y", javascript: "DD/MM/YYYY", description: "DD/MM/YYYY (01/03/2025)" },
+            { country: "Persian Format", php: "Y/m/d", python: "%Y/%m/%d", javascript: "YYYY/MM/DD", description: "YYYY/MM/DD (2025/03/01)" },
+            { country: "ISO 8601 with Time", php: "Y-m-d\\TH:i:sP", python: "%Y-%m-%dT%H:%M:%S%z", javascript: "YYYY-MM-DDTHH:mm:ssZ", description: "YYYY-MM-DDTHH:MM:SS+TZ (2025-03-01T13:45:30+00:00)" },
+            { country: "RFC 2822", php: "D, d M Y H:i:s O", python: "%a, %d %b %Y %H:%M:%S %z", javascript: "ddd, DD MMM YYYY HH:mm:ss Z", description: "Day, DD Mon YYYY HH:MM:SS +ZZZZ (Sat, 01 Mar 2025 13:45:30 +0000)" },
+            { country: "UNIX Timestamp", php: "U", python: "%s", javascript: "X", description: "Seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)" }
         ];
         
         // Initialize country formats
@@ -457,7 +458,26 @@
             countryFormats.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'country-format';
-                const currentFormat = currentLanguage === 'php' ? item.php : item.python;
+                let currentFormat, languageName;
+                
+                switch(currentLanguage) {
+                    case 'php':
+                        currentFormat = item.php;
+                        languageName = 'PHP';
+                        break;
+                    case 'python':
+                        currentFormat = item.python;
+                        languageName = 'Python';
+                        break;
+                    case 'javascript':
+                        currentFormat = item.javascript;
+                        languageName = 'JavaScript';
+                        break;
+                    default:
+                        currentFormat = item.php;
+                        languageName = 'PHP';
+                }
+                
                 div.innerHTML = `
                     <div style="margin-bottom: 5px;">
                         <strong style="color: #2c3e50;">${item.country}</strong>
@@ -469,7 +489,7 @@
                         ${currentFormat}
                     </div>
                     <div style="color: #666; font-size: 0.8em; margin-top: 5px;">
-                        ${currentLanguage === 'php' ? 'PHP' : 'Python'} format
+                        ${languageName} format
                     </div>
                 `;
                 div.addEventListener('click', () => {
@@ -777,7 +797,7 @@
                     preview = preview.replace(/年/g, '年');
                     preview = preview.replace(/月/g, '月');
                     preview = preview.replace(/日/g, '日');
-                } else {
+                } else if (currentLanguage === 'python') {
                     // Python date formatting
                     preview = preview.replace(/%d/g, String(now.getDate()).padStart(2, '0'));
                     preview = preview.replace(/%j/g, Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24));
@@ -804,6 +824,38 @@
                     preview = preview.replace(/%p/g, AMPM);
                     preview = preview.replace(/%z/g, '+0000'); // Simplified timezone
                     preview = preview.replace(/%s/g, Math.floor(now.getTime() / 1000));
+                    
+                    // Handle 年月日 for Japanese/Chinese formats
+                    preview = preview.replace(/年/g, '年');
+                    preview = preview.replace(/月/g, '月');
+                    preview = preview.replace(/日/g, '日');
+                } else if (currentLanguage === 'javascript') {
+                    // JavaScript date formatting (using Intl.DateTimeFormat patterns)
+                    preview = preview.replace(/YYYY/g, now.getFullYear());
+                    preview = preview.replace(/YY/g, String(now.getFullYear()).slice(-2));
+                    preview = preview.replace(/MM/g, String(now.getMonth() + 1).padStart(2, '0'));
+                    preview = preview.replace(/M/g, now.getMonth() + 1);
+                    preview = preview.replace(/DD/g, String(now.getDate()).padStart(2, '0'));
+                    preview = preview.replace(/D/g, now.getDate());
+                    preview = preview.replace(/MMMM/g, ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][now.getMonth()]);
+                    preview = preview.replace(/MMM/g, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][now.getMonth()]);
+                    preview = preview.replace(/dddd/g, ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][now.getDay()]);
+                    preview = preview.replace(/ddd/g, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][now.getDay()]);
+                    
+                    let hours24 = now.getHours();
+                    let hours12 = hours24 % 12 || 12;
+                    let minutes = String(now.getMinutes()).padStart(2, '0');
+                    let seconds = String(now.getSeconds()).padStart(2, '0');
+                    
+                    // Handle time formats
+                    preview = preview.replace(/HH/g, String(hours24).padStart(2, '0'));
+                    preview = preview.replace(/H/g, hours24);
+                    preview = preview.replace(/hh/g, String(hours12).padStart(2, '0'));
+                    preview = preview.replace(/h/g, hours12);
+                    preview = preview.replace(/mm/g, minutes);
+                    preview = preview.replace(/ss/g, seconds);
+                    preview = preview.replace(/Z/g, '+00:00'); // Simplified timezone
+                    preview = preview.replace(/X/g, Math.floor(now.getTime() / 1000));
                     
                     // Handle 年月日 for Japanese/Chinese formats
                     preview = preview.replace(/年/g, '年');
@@ -846,7 +898,7 @@
                     $formattedDate = date("<span id="phpExample"></span>", time());<br>
                     echo $formattedDate;
                 `;
-            } else {
+            } else if (currentLanguage === 'python') {
                 mainTitle.textContent = 'Python Date Format Builder';
                 explanationTitle.textContent = 'How to use in Python:';
                 explanationText.textContent = 'Copy the format string above and use it in your Python code like this:';
@@ -854,6 +906,17 @@
                     from datetime import datetime<br>
                     formatted_date = datetime.now().strftime("<span id="phpExample"></span>")<br>
                     print(formatted_date)
+                `;
+            } else if (currentLanguage === 'javascript') {
+                mainTitle.textContent = 'JavaScript Date Format Builder';
+                explanationTitle.textContent = 'How to use in JavaScript:';
+                explanationText.textContent = 'Copy the format string above and use it in your JavaScript code like this:';
+                codeExample.innerHTML = `
+                    const date = new Date();<br>
+                    const formattedDate = date.toLocaleDateString('en-US', {<br>
+                    &nbsp;&nbsp;year: 'numeric', month: '2-digit', day: '2-digit'<br>
+                    });<br>
+                    console.log(formattedDate);
                 `;
             }
             
