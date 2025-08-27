@@ -1,0 +1,60 @@
+# DateCoder Project - Cursor Configuration
+
+## Project Overview
+DateCoder is a web-based date format builder tool that helps developers create date format strings for PHP, Python, and JavaScript. It's a single-page HTML application with embedded CSS and JavaScript.
+
+## Key Features
+- Interactive date format builders with drag-and-drop functionality
+- Support for PHP date(), Python strftime(), and JavaScript date formatting
+- Pre-configured country-specific date formats (50+ formats)
+- Real-time preview of formatted dates
+- Language switching between PHP, Python, and JavaScript
+
+## Architecture
+- **index.html** - Single-page application containing all functionality
+  - Embedded CSS styles (~270 lines)
+  - JavaScript logic (~600 lines)
+  - Multi-language support (PHP/Python/JavaScript)
+  - Two-tab interface: Custom Format Builder and Country Formats
+
+## Core Components
+- **Language Switcher** - Dynamically changes UI and format examples
+- **Format Builder** - Drag-and-drop interface for custom date formats
+- **Country Formats** - Pre-configured formats for different countries with search
+- **Real-time Preview** - Shows formatted output as users build formats
+
+## Data Structure
+- `countryFormats` array contains 47+ predefined formats with PHP, Python, and JavaScript equivalents
+- `formatParts` array manages drag-and-drop format building
+- Language-specific format conversion logic for real-time previews
+
+## Multi-Language Support
+The application supports three programming languages with dynamic switching:
+- **PHP**: Uses `date()` function format codes (Y, m, d, H, i, s, etc.)
+- **Python**: Uses `strftime()` format codes (%Y, %m, %d, %H, %M, %S, etc.)
+- **JavaScript**: Uses custom format patterns (YYYY, MM, DD, HH, mm, ss, etc.)
+
+## Development Guidelines
+- All functionality is contained in a single HTML file
+- CSS and JavaScript are embedded (no external dependencies)
+- Use semantic HTML and modern CSS practices
+- Maintain consistent naming conventions for JavaScript functions
+- Ensure all three languages (PHP/Python/JavaScript) are supported for new features
+
+## File Structure
+```
+datecoder/
+├── index.html          # Main application file (contains everything)
+├── favicon.ico         # Site favicon
+├── img/               # Image assets
+├── deploy.py          # Production deployment script
+├── requirements.txt   # Python dependencies for deployment
+└── setup_env.sh       # Environment setup script
+```
+
+## Important Notes
+- No build process required - direct HTML/CSS/JS deployment
+- The application is self-contained in index.html
+- All country formats must include PHP, Python, and JavaScript equivalents
+- Real-time preview functionality is critical for user experience
+- Maintain responsive design for mobile and desktop users
