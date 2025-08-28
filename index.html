@@ -1094,6 +1094,89 @@
             }
         }
         
+        // Core JavaScript date formatting function (no external libraries needed)
+        function formatDate(date, format) {
+            const pad = (num) => String(num).padStart(2, '0');
+            const pad3 = (num) => String(num).padStart(3, '0');
+            
+            const replacements = {
+                // Year
+                'YYYY': date.getFullYear(),
+                'YY': String(date.getFullYear()).slice(-2),
+                'Y': date.getFullYear(),
+                
+                // Month
+                'MMMM': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][date.getMonth()],
+                'MMM': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][date.getMonth()],
+                'MM': pad(date.getMonth() + 1),
+                'M': date.getMonth() + 1,
+                
+                // Day
+                'DDDD': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][date.getDay()],
+                'DDD': ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][date.getDay()],
+                'DD': pad(date.getDate()),
+                'D': date.getDate(),
+                
+                // Hours
+                'HH': pad(date.getHours()),
+                'H': date.getHours(),
+                'hh': pad((date.getHours() % 12) || 12),
+                'h': (date.getHours() % 12) || 12,
+                
+                // Minutes
+                'mm': pad(date.getMinutes()),
+                'm': date.getMinutes(),
+                
+                // Seconds
+                'ss': pad(date.getSeconds()),
+                's': date.getSeconds(),
+                
+                // Milliseconds
+                'SSS': pad3(date.getMilliseconds()),
+                'SS': pad(Math.floor(date.getMilliseconds() / 10)),
+                'S': Math.floor(date.getMilliseconds() / 100),
+                
+                // AM/PM
+                'A': date.getHours() < 12 ? 'AM' : 'PM',
+                'a': date.getHours() < 12 ? 'am' : 'pm',
+                
+                // Timezone
+                'Z': date.getTimezoneOffset() / -60,
+                'ZZ': pad(date.getTimezoneOffset() / -60),
+                'ZZZ': (date.getTimezoneOffset() / -60).toFixed(2),
+                
+                // Unix timestamp
+                'X': Math.floor(date.getTime() / 1000),
+                'x': date.getTime(),
+                
+                // Day of year
+                'DDD': Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24),
+                
+                // Week of year
+                'WW': Math.ceil((Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24) + 1) / 7),
+                'W': Math.ceil((Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24) + 1) / 7),
+                
+                // Quarter
+                'Q': Math.ceil((date.getMonth() + 1) / 3),
+                
+                // Japanese/Chinese characters
+                '年': '年',
+                '月': '月',
+                '日': '日'
+            };
+            
+            // Sort replacements by length (longest first) to avoid conflicts
+            const sortedKeys = Object.keys(replacements).sort((a, b) => b.length - a.length);
+            
+            let result = format;
+            for (const key of sortedKeys) {
+                const regex = new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+                result = result.replace(regex, replacements[key]);
+            }
+            
+            return result;
+        }
+        
         // Language switching
         // Language-specific dropdown options
         const languageDropdownOptions = {
@@ -1272,16 +1355,22 @@
                 `;
             } else if (currentLanguage === 'javascript') {
                 mainTitle.textContent = 'JavaScript Date Format Builder';
-                customTabDescription.textContent = 'Select options from the dropdowns to build your JavaScript date format string (compatible with moment.js/day.js).';
-                formatResultTitle.textContent = 'Your JavaScript Date Format:';
-                explanationTitle.textContent = 'How to use in JavaScript:';
-                explanationText.textContent = 'Note: This shows a custom format string. For native JavaScript, use Intl.DateTimeFormat or a library like moment.js/day.js:';
-                codeExample.innerHTML = `
-                    // Custom format string: "<span id="phpExample"></span>"<br>
-                    // Use with libraries like moment.js:<br>
-                    const formattedDate = moment().format("<span id="phpExampleJS"></span>");<br>
-                    console.log(formattedDate);
-                `;
+                                 customTabDescription.textContent = 'Select options from the dropdowns to build your JavaScript date format string using core JavaScript Date methods.';
+                 formatResultTitle.textContent = 'Your JavaScript Date Format:';
+                 explanationTitle.textContent = 'How to use in JavaScript:';
+                 explanationText.textContent = 'Copy the format string above and use it with the built-in formatDate function:';
+                 codeExample.innerHTML = `
+                     // Your custom format string: "<span id="phpExample"></span>"<br>
+                     // Complete working example (copy and paste this code):<br>
+                     const date = new Date();<br>
+                     const formatted = formatDate(date, "<span id="phpExample"></span>");<br>
+                     console.log(formatted);<br>
+                     <br>
+                     // Or format a specific date:<br>
+                     const christmas = new Date('2024-12-25');<br>
+                     const christmasFormatted = formatDate(christmas, "<span id="phpExample"></span>");<br>
+                     console.log('Christmas:', christmasFormatted);
+                 `;
             }
             
             // Update the example with current format
