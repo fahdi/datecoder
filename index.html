@@ -1358,6 +1358,147 @@
             }, 100);
         });
         
+        // Initialize enhanced functionality
+        window.addEventListener('load', function() {
+            // Add copy functionality
+            addCopyToClipboard();
+            
+            // Add keyboard shortcuts
+            addKeyboardShortcuts();
+        });
+        
+        // Add copy to clipboard functionality
+        function addCopyToClipboard() {
+            const resultDiv = document.querySelector('.result');
+            if (resultDiv) {
+                // Create copy button
+                const copyBtn = document.createElement('button');
+                copyBtn.textContent = '📋 Copy Format';
+                copyBtn.className = 'btn-primary';
+                copyBtn.style.marginTop = '10px';
+                copyBtn.onclick = function() {
+                    const formatString = document.getElementById('formatString');
+                    if (formatString) {
+                        copyToClipboard(formatString.textContent);
+                    }
+                };
+                
+                resultDiv.appendChild(copyBtn);
+            }
+        }
+        
+        // Copy text to clipboard
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showNotification('Format copied to clipboard!', 'success');
+                }).catch(() => {
+                    fallbackCopyToClipboard(text);
+                });
+            } else {
+                fallbackCopyToClipboard(text);
+            }
+        }
+        
+        // Fallback copy method for older browsers
+        function fallbackCopyToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showNotification('Format copied to clipboard!', 'success');
+            } catch (err) {
+                showNotification('Failed to copy format', 'error');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+        
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notification => notification.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                border-radius: 6px;
+                color: white;
+                font-weight: bold;
+                z-index: 1000;
+                animation: slideIn 0.3s ease-out;
+                max-width: 300px;
+            `;
+            
+            // Set background color based on type
+            switch(type) {
+                case 'success':
+                    notification.style.backgroundColor = '#28a745';
+                    break;
+                case 'error':
+                    notification.style.backgroundColor = '#dc3545';
+                    break;
+                case 'warning':
+                    notification.style.backgroundColor = '#ffc107';
+                    notification.style.color = '#212529';
+                    break;
+                default:
+                    notification.style.backgroundColor = '#17a2b8';
+            }
+            
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 3 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 3000);
+        }
+        
+        // Add keyboard shortcuts
+        function addKeyboardShortcuts() {
+            document.addEventListener('keydown', function(e) {
+                // Ctrl/Cmd + K to focus search
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    const searchBox = document.getElementById('countrySearch');
+                    if (searchBox) {
+                        searchBox.focus();
+                    }
+                }
+                
+                // Ctrl/Cmd + L to switch language
+                if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
+                    e.preventDefault();
+                    const languageSelect = document.getElementById('languageSelect');
+                    if (languageSelect) {
+                        languageSelect.focus();
+                    }
+                }
+                
+                // Escape to clear format
+                if (e.key === 'Escape') {
+                    if (formatParts.length > 0) {
+                        document.getElementById('clearBtn').click();
+                    }
+                }
+            });
+        }
+        
         // Initialize
         window.onload = function() {
             switchTab('custom-tab-btn');
