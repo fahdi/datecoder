@@ -1481,46 +1481,59 @@
         
         // Add copy buttons to code examples
         function addCopyButtonsToCodeExamples() {
-            const codeBlocks = document.querySelectorAll('.code');
+            // Add copy buttons to format result code blocks
+            const codeBlocks = document.querySelectorAll('.result .code');
             codeBlocks.forEach((codeBlock, index) => {
-                // Create copy button for code
-                const copyBtn = document.createElement('button');
-                copyBtn.textContent = '📋 Copy Code';
-                copyBtn.className = 'btn-default';
-                copyBtn.style.cssText = `
-                    position: absolute;
-                    top: 5px;
-                    right: 5px;
-                    padding: 4px 8px;
-                    font-size: 11px;
-                    background: rgba(255,255,255,0.1);
-                    border: 1px solid rgba(255,255,255,0.3);
-                    color: #e2e8f0;
-                    border-radius: 3px;
-                    cursor: pointer;
-                    transition: all 0.2s ease;
-                `;
-                
-                copyBtn.onmouseenter = function() {
-                    this.style.background = 'rgba(255,255,255,0.2)';
-                    this.style.borderColor = 'rgba(255,255,255,0.5)';
-                };
-                
-                copyBtn.onmouseleave = function() {
-                    this.style.background = 'rgba(255,255,255,0.1)';
-                    this.style.borderColor = 'rgba(255,255,255,0.3)';
-                };
-                
-                copyBtn.onclick = function() {
-                    // Get the text content of the code block
-                    const codeText = codeBlock.textContent;
-                    copyToClipboard(codeText, 'Code copied to clipboard!');
-                };
-                
-                // Make sure the code block has position relative for absolute positioning
-                codeBlock.style.position = 'relative';
-                codeBlock.appendChild(copyBtn);
+                addCopyButtonToCodeBlock(codeBlock, '📋 Copy Format');
             });
+            
+            // Add copy buttons to usage example code blocks
+            const usageCodeBlocks = document.querySelectorAll('.explanation .code');
+            usageCodeBlocks.forEach((codeBlock, index) => {
+                addCopyButtonToCodeBlock(codeBlock, '📋 Copy Code');
+            });
+        }
+        
+        // Helper function to add copy button to a code block
+        function addCopyButtonToCodeBlock(codeBlock, buttonText) {
+            // Create copy button for code
+            const copyBtn = document.createElement('button');
+            copyBtn.textContent = buttonText;
+            copyBtn.className = 'btn-default';
+            copyBtn.style.cssText = `
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                padding: 4px 8px;
+                font-size: 11px;
+                background: rgba(255,255,255,0.1);
+                border: 1px solid rgba(255,255,255,0.3);
+                color: #e2e8f0;
+                border-radius: 3px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                z-index: 10;
+            `;
+            
+            copyBtn.onmouseenter = function() {
+                this.style.background = 'rgba(255,255,255,0.2)';
+                this.style.borderColor = 'rgba(255,255,255,0.5)';
+            };
+            
+            copyBtn.onmouseleave = function() {
+                this.style.background = 'rgba(255,255,255,0.1)';
+                this.style.borderColor = 'rgba(255,255,255,0.3)';
+            };
+            
+            copyBtn.onclick = function() {
+                // Get the text content of the code block
+                const codeText = codeBlock.textContent;
+                copyToClipboard(codeText, 'Usage example copied to clipboard!');
+            };
+            
+            // Make sure the code block has position relative for absolute positioning
+            codeBlock.style.position = 'relative';
+            codeBlock.appendChild(copyBtn);
         }
         
         // Copy text to clipboard
