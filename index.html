@@ -1499,44 +1499,55 @@
         
         // Helper function to add copy button to a code block
         function addCopyButtonToCodeBlock(codeBlock, buttonText) {
-            // Create copy button for code
+            // Store the original text content before adding the button
+            const originalText = codeBlock.textContent;
+            
+            // Create a container for the code block and copy button
+            const container = document.createElement('div');
+            container.style.cssText = `
+                position: relative;
+                margin-bottom: 10px;
+            `;
+            
+            // Move the code block into the container
+            codeBlock.parentNode.insertBefore(container, codeBlock);
+            container.appendChild(codeBlock);
+            
+            // Create copy button below the code block
             const copyBtn = document.createElement('button');
             copyBtn.textContent = buttonText;
             copyBtn.className = 'btn-default';
             copyBtn.style.cssText = `
-                position: absolute;
-                top: 5px;
-                right: 5px;
-                padding: 4px 8px;
-                font-size: 11px;
-                background: rgba(255,255,255,0.1);
-                border: 1px solid rgba(255,255,255,0.3);
-                color: #e2e8f0;
-                border-radius: 3px;
+                margin-top: 8px;
+                padding: 6px 12px;
+                font-size: 12px;
+                background: #f8f9fa;
+                border: 1px solid #dee2e6;
+                color: #495057;
+                border-radius: 4px;
                 cursor: pointer;
                 transition: all 0.2s ease;
-                z-index: 10;
+                display: block;
+                width: fit-content;
             `;
             
             copyBtn.onmouseenter = function() {
-                this.style.background = 'rgba(255,255,255,0.2)';
-                this.style.borderColor = 'rgba(255,255,255,0.5)';
+                this.style.background = '#e9ecef';
+                this.style.borderColor = '#adb5bd';
             };
             
             copyBtn.onmouseleave = function() {
-                this.style.background = 'rgba(255,255,255,0.1)';
-                this.style.borderColor = 'rgba(255,255,255,0.3)';
+                this.style.background = '#f8f9fa';
+                this.style.borderColor = '#dee2e6';
             };
             
             copyBtn.onclick = function() {
-                // Get the text content of the code block
-                const codeText = codeBlock.textContent;
-                copyToClipboard(codeText, 'Usage example copied to clipboard!');
+                // Copy the original text content (without the button text)
+                copyToClipboard(originalText, 'Usage example copied to clipboard!');
             };
             
-            // Make sure the code block has position relative for absolute positioning
-            codeBlock.style.position = 'relative';
-            codeBlock.appendChild(copyBtn);
+            // Add the button below the code block
+            container.appendChild(copyBtn);
         }
         
         // Copy text to clipboard
