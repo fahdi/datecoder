@@ -1457,6 +1457,9 @@
             
             // Add keyboard shortcuts
             addKeyboardShortcuts();
+            
+            // Add copy buttons to code examples (only once during initial load)
+            addCopyButtonsToCodeExamples();
         });
         
         // Add copy to clipboard functionality
@@ -1484,6 +1487,9 @@
         
         // Add copy buttons to code examples
         function addCopyButtonsToCodeExamples() {
+            // Remove any existing copy buttons first
+            removeExistingCopyButtons();
+            
             // Add copy buttons to format result code blocks
             const codeBlocks = document.querySelectorAll('.result .code');
             codeBlocks.forEach((codeBlock, index) => {
@@ -1494,6 +1500,42 @@
             const usageCodeBlocks = document.querySelectorAll('.explanation .code');
             usageCodeBlocks.forEach((codeBlock, index) => {
                 addCopyButtonToCodeBlock(codeBlock, '📋 Copy Code');
+            });
+        }
+        
+        // Remove existing copy buttons to prevent duplicates
+        function removeExistingCopyButtons() {
+            console.log('Removing existing copy buttons...');
+            
+            // Remove all copy buttons by class
+            const allCopyBtns = document.querySelectorAll('.copy-btn');
+            console.log('Found', allCopyBtns.length, 'copy buttons to remove');
+            allCopyBtns.forEach(btn => {
+                btn.remove();
+                console.log('Removed copy button');
+            });
+            
+            // Remove all copy button containers
+            const copyContainers = document.querySelectorAll('.copy-btn-container');
+            console.log('Found', copyContainers.length, 'copy containers to remove');
+            copyContainers.forEach(container => {
+                // Move the code block back to its original parent
+                const codeBlock = container.querySelector('.code');
+                if (codeBlock && container.parentNode) {
+                    container.parentNode.insertBefore(codeBlock, container);
+                    container.remove();
+                    console.log('Removed copy container and restored code block');
+                }
+            });
+            
+            // Also remove any buttons with copy text that might not have the class
+            const copyTextBtns = Array.from(document.querySelectorAll('button')).filter(btn => 
+                btn.textContent.includes('📋 Copy')
+            );
+            console.log('Found', copyTextBtns.length, 'copy text buttons to remove');
+            copyTextBtns.forEach(btn => {
+                btn.remove();
+                console.log('Removed copy text button');
             });
         }
         
