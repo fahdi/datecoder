@@ -1371,7 +1371,7 @@
         function addCopyToClipboard() {
             const resultDiv = document.querySelector('.result');
             if (resultDiv) {
-                // Create copy button
+                // Create copy button for format
                 const copyBtn = document.createElement('button');
                 copyBtn.textContent = '📋 Copy Format';
                 copyBtn.className = 'btn-primary';
@@ -1385,23 +1385,70 @@
                 
                 resultDiv.appendChild(copyBtn);
             }
+            
+            // Add copy buttons to code examples
+            addCopyButtonsToCodeExamples();
+        }
+        
+        // Add copy buttons to code examples
+        function addCopyButtonsToCodeExamples() {
+            const codeBlocks = document.querySelectorAll('.code');
+            codeBlocks.forEach((codeBlock, index) => {
+                // Create copy button for code
+                const copyBtn = document.createElement('button');
+                copyBtn.textContent = '📋 Copy Code';
+                copyBtn.className = 'btn-default';
+                copyBtn.style.cssText = `
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                    padding: 4px 8px;
+                    font-size: 11px;
+                    background: rgba(255,255,255,0.1);
+                    border: 1px solid rgba(255,255,255,0.3);
+                    color: #e2e8f0;
+                    border-radius: 3px;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                `;
+                
+                copyBtn.onmouseenter = function() {
+                    this.style.background = 'rgba(255,255,255,0.2)';
+                    this.style.borderColor = 'rgba(255,255,255,0.5)';
+                };
+                
+                copyBtn.onmouseleave = function() {
+                    this.style.background = 'rgba(255,255,255,0.1)';
+                    this.style.borderColor = 'rgba(255,255,255,0.3)';
+                };
+                
+                copyBtn.onclick = function() {
+                    // Get the text content of the code block
+                    const codeText = codeBlock.textContent;
+                    copyToClipboard(codeText, 'Code copied to clipboard!');
+                };
+                
+                // Make sure the code block has position relative for absolute positioning
+                codeBlock.style.position = 'relative';
+                codeBlock.appendChild(copyBtn);
+            });
         }
         
         // Copy text to clipboard
-        function copyToClipboard(text) {
+        function copyToClipboard(text, customMessage = null) {
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(text).then(() => {
-                    showNotification('Format copied to clipboard!', 'success');
+                    showNotification(customMessage || 'Format copied to clipboard!', 'success');
                 }).catch(() => {
-                    fallbackCopyToClipboard(text);
+                    fallbackCopyToClipboard(text, customMessage);
                 });
             } else {
-                fallbackCopyToClipboard(text);
+                fallbackCopyToClipboard(text, customMessage);
             }
         }
         
         // Fallback copy method for older browsers
-        function fallbackCopyToClipboard(text) {
+        function fallbackCopyToClipboard(text, customMessage = null) {
             const textArea = document.createElement('textarea');
             textArea.value = text;
             textArea.style.position = 'fixed';
@@ -1413,9 +1460,9 @@
             
             try {
                 document.execCommand('copy');
-                showNotification('Format copied to clipboard!', 'success');
+                showNotification(customMessage || 'Format copied to clipboard!', 'success');
             } catch (err) {
-                showNotification('Failed to copy format', 'error');
+                showNotification('Failed to copy to clipboard', 'error');
             }
             
             document.body.removeChild(textArea);
