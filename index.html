@@ -950,6 +950,9 @@
             document.getElementById('formatString').textContent = formatString;
             document.getElementById('phpExample').textContent = formatString;
             updatePreview(formatString);
+            
+            // Update usage examples with current format
+            updateUsageExamples(formatString);
         }
         
         function updatePreview(formatString) {
@@ -1701,6 +1704,56 @@
             updateDropdowns(); // Initialize dropdowns for default language
             initCountryFormats(); // Initialize country formats
         };
+        
+        // Update usage examples with current format
+        function updateUsageExamples(formatString) {
+            if (!formatString) return;
+            
+            // Update the format example in the current language
+            const phpExample = document.getElementById('phpExample');
+            if (phpExample) {
+                phpExample.textContent = formatString;
+            }
+            
+            // Update the usage example code based on current language
+            const codeExample = document.querySelector('.explanation .code');
+            if (codeExample && currentLanguage) {
+                if (currentLanguage === 'php') {
+                    codeExample.innerHTML = `
+                        // Your custom format string: "${formatString}"<br>
+                        // Complete working example (copy and paste this code):<br>
+                        $formattedDate = date("${formatString}", time());<br>
+                        echo $formattedDate;
+                    `;
+                } else if (currentLanguage === 'python') {
+                    codeExample.innerHTML = `
+                        # Your custom format string: "${formatString}"<br>
+                        # Complete working example (copy and paste this code):<br>
+                        from datetime import datetime<br>
+                        formatted_date = datetime.now().strftime("${formatString}")<br>
+                        print(formatted_date)
+                    `;
+                } else if (currentLanguage === 'javascript') {
+                    codeExample.innerHTML = `
+                        // Your custom format string: "${formatString}"<br>
+                        // Complete working example (copy and paste this code):<br>
+                        const date = new Date();<br>
+                        const formatted = formatDate(date, "${formatString}");<br>
+                        console.log(formatted);<br>
+                        <br>
+                        // Or format a specific date:<br>
+                        const christmas = new Date('2024-12-25');<br>
+                        const christmasFormatted = formatDate(christmas, "${formatString}");<br>
+                        console.log('Christmas:', christmasFormatted);
+                    `;
+                }
+                
+                // Re-add copy buttons to the updated content
+                addCopyButtonsToCodeExamples();
+            }
+        }
+        
+        // Enhanced format validation
     </script>
 </body>
 </html>
